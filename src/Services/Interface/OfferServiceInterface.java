@@ -5,13 +5,20 @@
  */
 package Services.Interface;
 
+import Entities.Offer;
+import java.sql.SQLException;
+import java.util.List;
+
 /**
  *
  * @author Asus
  */
 public interface OfferServiceInterface {
-     public abstract Offer get(Offer obj){
-         
-     }
+     public abstract Offer get(Offer obj) throws SQLException;
+     public List<Offer> getAll(Offer obj)throws SQLException;
+     public Offer create(Offer obj)throws SQLException;
+   
+     public void update(Offer obj)throws SQLException;
+     
     
 }
