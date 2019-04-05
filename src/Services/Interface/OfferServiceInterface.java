@@ -7,6 +7,7 @@ package Services.Interface;
 
 import Entities.Offer;
 
+
 /**
  *
  * @author Asus
@@ -14,7 +15,7 @@ import Entities.Offer;
 public interface OfferServiceInterface {
      public abstract Offer get(Offer obj){
          return null;
-         
+  
      }
     
 }
