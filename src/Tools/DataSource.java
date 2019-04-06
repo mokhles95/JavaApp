@@ -19,9 +19,9 @@ import java.sql.Statement;
  */
 
 public class DataSource {
-    private static final String url = "jdbc:mysql://localhost:3306/smartstart?useSSL=true";
+    private static final String url = "jdbc:mysql://localhost:3306/integree?useSSL=true";
     private static final  String user = "root";
-    private static final String passwd = "";
+    private static final String passwd = "thuglife";
     private static Connection connexion = null;
 
     private DataSource(){

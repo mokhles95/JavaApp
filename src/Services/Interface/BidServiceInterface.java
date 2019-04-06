@@ -12,8 +12,8 @@ import Entities.Bid;
  * @author asus
  */
 public interface BidServiceInterface {
-    public String displayBids();
-    public void addBid(Bid bid);
+    public String  displayBids();
+    public void  addBid(Bid bid);
     public void deleteBid(int idBid);
-    public void updateBid(int idBid);
+    public void updateBid(Bid bid);
 }

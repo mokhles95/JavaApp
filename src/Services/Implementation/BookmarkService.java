@@ -5,8 +5,9 @@
  */
 package Services.Implementation;
 
-import Entities.Bid;
-import Services.Interface.BidServiceInterface;
+import Entities.Project;
+import Entities.User;
+import Services.Interface.BookmarkServiceInterface;
 import Tools.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,28 +22,30 @@ import java.util.logging.Logger;
  *
  * @author asus
  */
-public class BidService implements BidServiceInterface{
-    private static PreparedStatement preparedStatement;
+public class BookmarkService implements BookmarkServiceInterface{
+     private static PreparedStatement preparedStatement;
     private static Statement statement;
     private static ResultSet resultSet;
-    static Connection cnx = DataSource.dbConnexion();   
+    Connection cnx = DataSource.dbConnexion();   
     private static final Logger logger = Logger.getLogger(AuthenticationService.class.getName());
-    private static BidService bidServiceInstance;
+    
+    private static BookmarkService bookmarkServiceInstance;
 
     
-    private BidService(){}
+    private BookmarkService(){}
     
-    public static BidService getInstance(){
-        if(bidServiceInstance==null) 
-            bidServiceInstance=new BidService();
-        return bidServiceInstance;
+    public static BookmarkService getInstance(){
+        if(bookmarkServiceInstance==null) 
+            bookmarkServiceInstance=new BookmarkService();
+        return bookmarkServiceInstance;
     }
+   
 
-    
     @Override
-    public String displayBids() {
+    public void displayBookmarks() {
         try{
-        String query = "SELECT * FROM bid";
+    	cnx.setAutoCommit(false);
+        String query = "SELECT * FROM bookmark";
         statement = cnx.createStatement();
 
         //int counter = 1;            
@@ -66,57 +69,23 @@ public class BidService implements BidServiceInterface{
 			logger.log(Level.SEVERE, exception.getMessage());
 
     }
-    return "false";
-    }
-        
+    }    
 
     @Override
-    public void addBid(Bid bid) {
-    try{
-    	cnx.setAutoCommit(false);
-        String query = "INSERT INTO bid VALUES (default,?,?,?,?) ";
-        preparedStatement = cnx.prepareStatement(query);
-        int counter = 1;            
-        preparedStatement.setInt(counter++, bid.getMinimalRate());
-        preparedStatement.setInt(counter++, bid.getDeliveryTime());
-        preparedStatement.setInt(counter++, bid.getFreelancerId());
-        preparedStatement.setInt(counter++, bid.getProjectId());
-        preparedStatement.executeUpdate();
-        cnx.commit();
-            
-        
-        }catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-            logger.log(Level.SEVERE, exception.getMessage());
-
-    } finally {
-        if (preparedStatement!= null)
-          try {
-              preparedStatement.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (cnx!= null)
-          try {
-              cnx.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      }
-
-    //return false;
-    }
-
-    @Override
-    public void deleteBid(int idBid) {
-    try{
+    public boolean deleteBookmark(Project project, User user) {
+            try{
             //cnx.setAutoCommit(false);
-            String query = "DELETE FROM bid WHERE id '" + idBid + "'";
+            String query = "DELETE FROM bookmark WHERE project_id = ? AND freelancer_id = ?";
             preparedStatement = cnx.prepareStatement(query);
+            //preparedStatement.addBatch();
+            //preparedStatement.executeBatch();
             int counter = 1;            
-            //preparedStatement.setString(counter++, email);
-            //preparedStatement.setString(counter++, username);
-            //resultSet = preparedStatement.executeUpdate();
+            preparedStatement.setInt(counter++, project.getId());
+            preparedStatement.setInt(counter++, user.getId());
+            if (preparedStatement.executeUpdate() > 0 )
+                return true;
+            else
+                return false;
 
             }catch (SQLException exception) {
                 System.out.println(exception.getMessage());
@@ -137,43 +106,51 @@ public class BidService implements BidServiceInterface{
             }
           }
 
-        //return false;    
-        }
-
-    @Override
-    public void updateBid(Bid bid) {
-    try{
-            //cnx.setAutoCommit(false);
-            String query = "INSERT INTO bid VALUES (?,?,?,?) WHERE id = ? ";
-            preparedStatement = cnx.prepareStatement(query);
-            int counter = 1;            
-            preparedStatement.setInt(counter++, bid.getFreelancerId());
-            preparedStatement.setInt(counter++, bid.getProjectId());
-            preparedStatement.setInt(counter++, bid.getDeliveryTime());
-            preparedStatement.setInt(counter++, bid.getMinimalRate());
-            //resultSet = preparedStatement.executeUpdate();
-
-            }catch (SQLException exception) {
-                System.out.println(exception.getMessage());
-                            logger.log(Level.SEVERE, exception.getMessage());
-
-        } finally {
-            if (preparedStatement!= null)
-              try {
-                  preparedStatement.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (cnx!= null)
-              try {
-                  cnx.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
-            }
-          }
-
-        //return false;
-        }
+        return false;    
     
 }
+
+   
+     @Override
+    public boolean addBookmark(Project project, User user) {
+            try{
+            //cnx.setAutoCommit(false);
+            String query = "DELETE FROM bookmark WHERE project_id = ? AND freelancer_id = ?";
+            preparedStatement = cnx.prepareStatement(query);
+            //preparedStatement.addBatch();
+            //preparedStatement.executeBatch();
+            int counter = 1;            
+            preparedStatement.setInt(counter++, project.getId());
+            preparedStatement.setInt(counter++, user.getId());
+            if (preparedStatement.executeUpdate() > 0 )
+                return true;
+            else
+                return false;
+
+            }catch (SQLException exception) {
+                System.out.println(exception.getMessage());
+                            logger.log(Level.SEVERE, exception.getMessage());
+
+        } finally {
+            if (preparedStatement!= null)
+              try {
+                  preparedStatement.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (cnx!= null)
+              try {
+                  cnx.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          }
+
+        return false;    
+    
+}
+
+   
+}    
+    
 

@@ -34,8 +34,8 @@
             <PasswordField fx:id="repeatPasswordText" layoutX="26.0" layoutY="359.0" />
             <TextField fx:id="usernameText" layoutX="26.0" layoutY="252.0" />
             <TextField fx:id="emailText" layoutX="26.0" layoutY="196.0" />
-            <RadioButton layoutX="33.0" layoutY="140.0" mnemonicParsing="false" text="Employer" />
-            <RadioButton layoutX="185.0" layoutY="140.0" mnemonicParsing="false" text="Freelancer" />
+            <RadioButton fx:id="employerType" layoutX="33.0" layoutY="140.0" mnemonicParsing="false" text="Employer" />
+            <RadioButton fx:id="freelancerType" layoutX="185.0" layoutY="140.0" mnemonicParsing="false" text="Freelancer" />
             <Button fx:id="signupBtn" layoutX="245.0" layoutY="414.0" mnemonicParsing="false" onAction="#signup" text="Sign up" />
             <Label layoutX="30.0" layoutY="84.0" prefHeight="25.0" prefWidth="219.0" text="Choose your account type" />
          </children>

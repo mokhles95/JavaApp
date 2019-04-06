@@ -64,6 +64,7 @@ public class AuthenticationService implements AuthenticationServiceInterface{
         //String username_canonical = username;
         //String email_canonical	= email;
         try { 
+        cnx.setAutoCommit(false);
         String query = "INSERT INTO fos_user(username,username_canonical, email,email_canonical,enabled,roles,type, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			preparedStatement = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			int counter = 1;

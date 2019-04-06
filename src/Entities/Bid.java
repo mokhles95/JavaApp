@@ -17,9 +17,25 @@ public class Bid {
     
     private int deliveryTime;
     
-    private Project projectId;
+    private int projectId;
     
-    private FosUser freelancerId;
+    private int freelancerId;
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    public int getFreelancerId() {
+        return freelancerId;
+    }
+
+    public void setFreelancerId(int freelancerId) {
+        this.freelancerId = freelancerId;
+    }
 
     public Bid() {
     }
@@ -27,11 +43,17 @@ public class Bid {
     public Bid(Integer id) {
         this.id = id;
     }
-
     public Bid(Integer id, int minimalRate, int deliveryTime) {
         this.id = id;
         this.minimalRate = minimalRate;
         this.deliveryTime = deliveryTime;
+    }
+
+    public Bid(int minimalRate, int deliveryTime, int freelancerId,int projectId) {
+        this.minimalRate = minimalRate;
+        this.deliveryTime = deliveryTime;
+        this.freelancerId = freelancerId;
+        this.projectId = projectId;
     }
 
     public Integer getId() {
@@ -58,21 +80,7 @@ public class Bid {
         this.deliveryTime = deliveryTime;
     }
 
-    public Project getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Project projectId) {
-        this.projectId = projectId;
-    }
-
-    public FosUser getFreelancerId() {
-        return freelancerId;
-    }
-
-    public void setFreelancerId(FosUser freelancerId) {
-        this.freelancerId = freelancerId;
-    }
+   
 
     @Override
     public int hashCode() {

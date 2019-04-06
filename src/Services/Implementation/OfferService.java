@@ -21,11 +21,21 @@ import java.util.logging.Logger;
  * @author Asus
  */
 public class OfferService implements OfferServiceInterface{
-    private static OfferService OfferServiceInstance;
+    private static OfferService offerServiceInstance;
     private static PreparedStatement preparedStatement;
     private static ResultSet resultSet;
     Connection cnx = DataSource.dbConnexion();   
     private static final Logger logger = Logger.getLogger(AuthenticationService.class.getName());
+    
+
+    
+    private OfferService(){}
+    
+    public static OfferService getInstance(){
+        if(offerServiceInstance==null) 
+            offerServiceInstance=new OfferService();
+        return offerServiceInstance;
+    }
     
 
     @Override

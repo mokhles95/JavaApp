@@ -6,6 +6,8 @@ package SmartStart;
  * and open the template in the editor.
  */
 
+import Entities.Bid;
+import Services.Implementation.BidService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,7 +33,10 @@ public class SmartStart extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
+        BidService bidService = BidService.getInstance();
+        Bid bid = new Bid(1, 3, 777, 6);
+        bidService.addBid(bid);
     }
     
 }
