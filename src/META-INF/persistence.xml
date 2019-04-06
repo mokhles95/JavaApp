@@ -18,11 +18,11 @@
     <class>Entities.ReviewEmp</class>
     <class>Entities.Article</class>
     <class>Entities.NotifiableEntity</class>
-    <class>Entities.Bid_1</class>
     <class>Entities.Skills</class>
     <class>Entities.FreelancersBookmark</class>
     <class>Entities.Freelancer</class>
     <class>Entities.Project</class>
+    <class>Entities.Bid</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/SmartStart?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

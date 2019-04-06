@@ -77,7 +77,7 @@ public class FosUser  {
     
     private Collection<Report> reportCollection1;
     
-    private Collection<Bid_1> bidCollection;
+    private Collection<Bid> bidCollection;
     
     private Collection<Job> jobCollection;
 
@@ -383,11 +383,11 @@ public class FosUser  {
         this.reportCollection1 = reportCollection1;
     }
 
-    public Collection<Bid_1> getBidCollection() {
+    public Collection<Bid> getBidCollection() {
         return bidCollection;
     }
 
-    public void setBidCollection(Collection<Bid_1> bidCollection) {
+    public void setBidCollection(Collection<Bid> bidCollection) {
         this.bidCollection = bidCollection;
     }
 

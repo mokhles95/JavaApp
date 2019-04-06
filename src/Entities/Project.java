@@ -41,7 +41,7 @@ public class Project implements Serializable {
     
     private Collection<Review> reviewCollection;
     
-    private Collection<Bid_1> bidCollection;
+    private Collection<Bid> bidCollection;
 
     public Project() {
     }
@@ -165,11 +165,11 @@ public class Project implements Serializable {
         this.reviewCollection = reviewCollection;
     }
 
-    public Collection<Bid_1> getBidCollection() {
+    public Collection<Bid> getBidCollection() {
         return bidCollection;
     }
 
-    public void setBidCollection(Collection<Bid_1> bidCollection) {
+    public void setBidCollection(Collection<Bid> bidCollection) {
         this.bidCollection = bidCollection;
     }
 

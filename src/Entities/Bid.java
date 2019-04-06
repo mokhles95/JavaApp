@@ -7,7 +7,7 @@ package Entities;
 
 
 
-public class Bid_1 {
+public class Bid {
 
     private static final long serialVersionUID = 1L;
     
@@ -21,14 +21,14 @@ public class Bid_1 {
     
     private FosUser freelancerId;
 
-    public Bid_1() {
+    public Bid() {
     }
 
-    public Bid_1(Integer id) {
+    public Bid(Integer id) {
         this.id = id;
     }
 
-    public Bid_1(Integer id, int minimalRate, int deliveryTime) {
+    public Bid(Integer id, int minimalRate, int deliveryTime) {
         this.id = id;
         this.minimalRate = minimalRate;
         this.deliveryTime = deliveryTime;
@@ -84,10 +84,10 @@ public class Bid_1 {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Bid_1)) {
+        if (!(object instanceof Bid)) {
             return false;
         }
-        Bid_1 other = (Bid_1) object;
+        Bid other = (Bid) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
