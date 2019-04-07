@@ -7,7 +7,9 @@ package SmartStart;
  */
 
 import Entities.Bid;
+import Entities.Bookmark;
 import Services.Implementation.BidService;
+import Services.Implementation.BookmarkService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,9 +36,9 @@ public class SmartStart extends Application {
      */
     public static void main(String[] args) {
         //launch(args);
-        BidService bidService = BidService.getInstance();
-        Bid bid = new Bid(1, 3, 777, 6);
-        bidService.addBid(bid);
+        BookmarkService bookmarkService = BookmarkService.getInstance();
+        Bookmark bookmark = new Bookmark(2, 2);
+        bookmarkService.addBookmark(bookmark);
     }
     
 }

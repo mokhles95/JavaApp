@@ -5,9 +5,11 @@
  */
 package Services.Implementation;
 
+import Entities.Bookmark;
 import Entities.Project;
 import Entities.User;
 import Services.Interface.BookmarkServiceInterface;
+import Tools.CurrentDate;
 import Tools.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,7 +48,7 @@ public class BookmarkService implements BookmarkServiceInterface{
     @Override
     public void displayBookmarks() {
         try{
-    	cnx.setAutoCommit(false);
+    	//cnx.setAutoCommit(false);
         String query = "SELECT * FROM bookmark";
         statement = cnx.createStatement();
 
@@ -72,7 +76,7 @@ public class BookmarkService implements BookmarkServiceInterface{
     }    
 
     @Override
-    public boolean deleteBookmark(Project project, User user) {
+    public boolean deleteBookmark(Bookmark bookmark) {
             try{
             //cnx.setAutoCommit(false);
             String query = "DELETE FROM bookmark WHERE project_id = ? AND freelancer_id = ?";
@@ -80,8 +84,8 @@ public class BookmarkService implements BookmarkServiceInterface{
             //preparedStatement.addBatch();
             //preparedStatement.executeBatch();
             int counter = 1;            
-            preparedStatement.setInt(counter++, project.getId());
-            preparedStatement.setInt(counter++, user.getId());
+            preparedStatement.setInt(counter++, bookmark.getId());
+            preparedStatement.setInt(counter++, bookmark.getId());
             if (preparedStatement.executeUpdate() > 0 )
                 return true;
             else
@@ -112,17 +116,21 @@ public class BookmarkService implements BookmarkServiceInterface{
 
    
      @Override
-    public boolean addBookmark(Project project, User user) {
+    public boolean addBookmark(Bookmark bookmark) {
             try{
             //cnx.setAutoCommit(false);
-            String query = "DELETE FROM bookmark WHERE project_id = ? AND freelancer_id = ?";
+            String query = "INSERT INTO bookmark VALUES(default,?,?,?)";
             preparedStatement = cnx.prepareStatement(query);
             //preparedStatement.addBatch();
             //preparedStatement.executeBatch();
             int counter = 1;            
-            preparedStatement.setInt(counter++, project.getId());
-            preparedStatement.setInt(counter++, user.getId());
+            Date date = CurrentDate.getCurrentDate();
+            preparedStatement.setInt(counter++, bookmark.getFreelancerId());
+            preparedStatement.setInt(counter++, bookmark.getProjectId());
+            preparedStatement.setDate(counter++, date);
+            
             if (preparedStatement.executeUpdate() > 0 )
+                
                 return true;
             else
                 return false;

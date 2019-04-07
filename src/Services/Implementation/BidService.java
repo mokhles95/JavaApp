@@ -71,7 +71,7 @@ public class BidService implements BidServiceInterface{
         
 
     @Override
-    public void addBid(Bid bid) {
+    public boolean addBid(Bid bid) {
     try{
     	cnx.setAutoCommit(false);
         String query = "INSERT INTO bid VALUES (default,?,?,?,?) ";
@@ -83,6 +83,7 @@ public class BidService implements BidServiceInterface{
         preparedStatement.setInt(counter++, bid.getProjectId());
         preparedStatement.executeUpdate();
         cnx.commit();
+        return true;
             
         
         }catch (SQLException exception) {
@@ -104,19 +105,20 @@ public class BidService implements BidServiceInterface{
         }
       }
 
-    //return false;
+    return false;
     }
 
     @Override
-    public void deleteBid(int idBid) {
+    public boolean deleteBid(int idBid) {
     try{
             //cnx.setAutoCommit(false);
-            String query = "DELETE FROM bid WHERE id '" + idBid + "'";
+            String query = "DELETE FROM bid WHERE id = ?";
             preparedStatement = cnx.prepareStatement(query);
             int counter = 1;            
-            //preparedStatement.setString(counter++, email);
+            preparedStatement.setInt(counter++, idBid);
             //preparedStatement.setString(counter++, username);
-            //resultSet = preparedStatement.executeUpdate();
+             preparedStatement.executeUpdate();
+             return true;
 
             }catch (SQLException exception) {
                 System.out.println(exception.getMessage());
@@ -137,11 +139,11 @@ public class BidService implements BidServiceInterface{
             }
           }
 
-        //return false;    
+        return false;    
         }
 
     @Override
-    public void updateBid(Bid bid) {
+    public boolean updateBid(Bid bid) {
     try{
             //cnx.setAutoCommit(false);
             String query = "INSERT INTO bid VALUES (?,?,?,?) WHERE id = ? ";
@@ -152,6 +154,8 @@ public class BidService implements BidServiceInterface{
             preparedStatement.setInt(counter++, bid.getDeliveryTime());
             preparedStatement.setInt(counter++, bid.getMinimalRate());
             //resultSet = preparedStatement.executeUpdate();
+            return true;
+
 
             }catch (SQLException exception) {
                 System.out.println(exception.getMessage());
@@ -172,7 +176,7 @@ public class BidService implements BidServiceInterface{
             }
           }
 
-        //return false;
+        return false;
         }
     
 }

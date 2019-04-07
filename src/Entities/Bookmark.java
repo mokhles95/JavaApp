@@ -18,12 +18,25 @@ public class Bookmark implements Serializable {
    
     private Date dateAdded;
     
-    private Project projectId;
+    private int projectId;
     
-    private FosUser freelancerId;
+    private int freelancerId;
 
-    public Bookmark() {
+    public Bookmark(Integer id, Date dateAdded, int projectId, int freelancerId) {
+        this.id = id;
+        this.dateAdded = dateAdded;
+        this.projectId = projectId;
+        this.freelancerId = freelancerId;
     }
+
+    public Bookmark(int projectId, int freelancerId) {
+        this.projectId = projectId;
+        this.freelancerId = freelancerId;
+    }
+    
+    
+
+
 
     public Bookmark(Integer id) {
         this.id = id;
@@ -45,19 +58,19 @@ public class Bookmark implements Serializable {
         this.dateAdded = dateAdded;
     }
 
-    public Project getProjectId() {
+    public int getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Project projectId) {
+    public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
 
-    public FosUser getFreelancerId() {
+    public int getFreelancerId() {
         return freelancerId;
     }
 
-    public void setFreelancerId(FosUser freelancerId) {
+    public void setFreelancerId(int freelancerId) {
         this.freelancerId = freelancerId;
     }
 

@@ -5,6 +5,7 @@
  */
 package Services.Interface;
 
+import Entities.Bookmark;
 import Entities.Project;
 import Entities.User;
 
@@ -13,7 +14,7 @@ import Entities.User;
  * @author asus
  */
 public interface BookmarkServiceInterface {
-        public boolean addBookmark(Project project, User user);
-    public boolean deleteBookmark(Project project, User user);
+    public boolean addBookmark(Bookmark bookmark);
+    public boolean deleteBookmark(Bookmark bookmark);
     public void displayBookmarks();
 }

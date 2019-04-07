@@ -13,7 +13,7 @@ import Entities.Bid;
  */
 public interface BidServiceInterface {
     public String  displayBids();
-    public void  addBid(Bid bid);
-    public void deleteBid(int idBid);
-    public void updateBid(Bid bid);
+    public boolean  addBid(Bid bid);
+    public boolean deleteBid(int idBid);
+    public boolean updateBid(Bid bid);
 }
