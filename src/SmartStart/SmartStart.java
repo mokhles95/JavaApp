@@ -6,10 +6,11 @@ package SmartStart;
  * and open the template in the editor.
  */
 
-import Entities.Bid;
 import Entities.Bookmark;
 import Services.Implementation.BidService;
 import Services.Implementation.BookmarkService;
+import Tools.CurrentDate;
+import java.sql.Date;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,8 +38,12 @@ public class SmartStart extends Application {
     public static void main(String[] args) {
         //launch(args);
         BookmarkService bookmarkService = BookmarkService.getInstance();
-        Bookmark bookmark = new Bookmark(2, 2);
-        bookmarkService.addBookmark(bookmark);
+
+        Bookmark bookmark = new Bookmark(4,1,1);
+        System.out.println(bookmarkService.addBookmark(bookmark));
+        
+        
+        
     }
     
 }

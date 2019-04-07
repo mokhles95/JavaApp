@@ -5,6 +5,7 @@
  */
 package Entities;
 
+import Tools.CurrentDate;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,17 +15,19 @@ public class Bookmark implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private Integer id;
+    private int id;
    
     private Date dateAdded;
     
     private int projectId;
     
     private int freelancerId;
+    
+    
 
-    public Bookmark(Integer id, Date dateAdded, int projectId, int freelancerId) {
+    public Bookmark(int id, int projectId, int freelancerId) {
         this.id = id;
-        this.dateAdded = dateAdded;
+        this.dateAdded = CurrentDate.getCurrentDate();
         this.projectId = projectId;
         this.freelancerId = freelancerId;
     }
@@ -38,17 +41,14 @@ public class Bookmark implements Serializable {
 
 
 
-    public Bookmark(Integer id) {
+    public Bookmark(int id) {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
+    public int getId() {
+        return this.id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Date getDateAdded() {
         return dateAdded;
@@ -74,29 +74,13 @@ public class Bookmark implements Serializable {
         this.freelancerId = freelancerId;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Bookmark)) {
-            return false;
-        }
-        Bookmark other = (Bookmark) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+    
 
     @Override
     public String toString() {
-        return "Entities.Bookmark[ id=" + id + " ]";
+        return "Bookmark{" + "id=" + id + ", dateAdded=" + dateAdded + ", projectId=" + projectId + ", freelancerId=" + freelancerId + '}';
     }
+
+
     
 }

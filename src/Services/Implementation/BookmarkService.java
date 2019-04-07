@@ -48,7 +48,7 @@ public class BookmarkService implements BookmarkServiceInterface{
     @Override
     public void displayBookmarks() {
         try{
-    	//cnx.setAutoCommit(false);
+    	cnx.setAutoCommit(false);
         String query = "SELECT * FROM bookmark";
         statement = cnx.createStatement();
 
@@ -77,41 +77,29 @@ public class BookmarkService implements BookmarkServiceInterface{
 
     @Override
     public boolean deleteBookmark(Bookmark bookmark) {
+        boolean deleted = false;
             try{
-            //cnx.setAutoCommit(false);
-            String query = "DELETE FROM bookmark WHERE project_id = ? AND freelancer_id = ?";
-            preparedStatement = cnx.prepareStatement(query);
-            //preparedStatement.addBatch();
-            //preparedStatement.executeBatch();
-            int counter = 1;            
-            preparedStatement.setInt(counter++, bookmark.getId());
-            preparedStatement.setInt(counter++, bookmark.getId());
-            if (preparedStatement.executeUpdate() > 0 )
-                return true;
-            else
-                return false;
+            int bookmarkId;
+            if (bookmark != null)
+            {
+                bookmarkId = bookmark.getId();
+                String query = "DELETE FROM bookmark WHERE id = ?";                
+                preparedStatement = cnx.prepareStatement(query);
+
+                preparedStatement.setInt(1, bookmarkId);
+                preparedStatement.executeUpdate();
+               deleted = true;
+            }
+                
+            
+
 
             }catch (SQLException exception) {
                 System.out.println(exception.getMessage());
                             logger.log(Level.SEVERE, exception.getMessage());
 
-        } finally {
-            if (preparedStatement!= null)
-              try {
-                  preparedStatement.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (cnx!= null)
-              try {
-                  cnx.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
-            }
-          }
-
-        return false;    
-    
+        } 
+    return deleted;
 }
 
    
