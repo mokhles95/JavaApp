@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Views.Project;
+package Controllers.Project;
 
-import Views.Bid.*;
 import Tools.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
