@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Views.Authentication;
+package Controllers.Authentication;
 
 import Entities.User;
 import Services.Implementation.AuthenticationService;

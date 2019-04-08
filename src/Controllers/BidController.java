@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.Bid;
+package Controllers;
 
 import Entities.Bid;
-import Services.Implementation.BidService;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import static java.awt.SystemColor.window;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -23,24 +23,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
+ * FXML Controller class
  *
  * @author asus
  */
-public class BidController implements Initializable{
-   
-    TableView<Bid> bidTable;
-    TextField nameInput, priceInput, quantityInput;
-    BidService bidService = BidService.getInstance();
-    
-    
+public class BidController implements Initializable {
+
+    @FXML
+    private TableView<?> BidsTable;
+    @FXML
+    private TableColumn<?, ?> ProjectNameColumn;
+    @FXML
+    private TableColumn<?, ?> MinimalRateColumn;
+    @FXML
+    private TableColumn<?, ?> DeliveryTimeColumn;
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
     }    
-    
-    private void displayBids()
+     private void displayBids()
     {
       //Name column
         TableColumn<Bid, String> nameColumn = new TableColumn<>("Name");
@@ -108,7 +115,7 @@ public class BidController implements Initializable{
 
     //Delete button clicked
     public void deleteButtonClicked(){
-        ObservableList<Product> productSelected, allProducts;
+        ObservableList<Bid> productSelected, allProducts;
         allProducts = table.getItems();
         productSelected = table.getSelectionModel().getSelectedItems();
 
@@ -116,13 +123,9 @@ public class BidController implements Initializable{
     }
 
     //Get all of the products
-    public ObservableList<Product> getProduct(){
+    public ObservableList<Bid> getProduct(){
         ObservableList<Bid> products = FXCollections.observableArrayList();
-        products.add(new Product("Laptop", 859.00, 20));
-        products.add(new Product("Bouncy Ball", 2.49, 198));
-        products.add(new Product("Toilet", 99.00, 74));
-        products.add(new Product("The Notebook DVD", 19.99, 12));
-        products.add(new Product("Corn", 1.49, 856));
+        products.add(new Bid(0, 0, 0, 0));
         return products;
     }
 
