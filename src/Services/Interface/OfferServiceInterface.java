@@ -16,7 +16,7 @@ import java.util.List;
 public interface OfferServiceInterface {
      public abstract Offer get(Offer obj) throws SQLException;
      public List<Offer> getAll(Offer obj)throws SQLException;
-     public Offer create(Offer obj)throws SQLException;
+     public void create(Offer obj)throws SQLException;
    
      public void update(Offer obj)throws SQLException;
      

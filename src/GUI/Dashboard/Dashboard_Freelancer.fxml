@@ -94,7 +94,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="BARS" size="16" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="list_tickets1" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#openlist_tickets" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" style="-fx-background-color: #3a3cFF;" text="My Bids" textFill="WHITE">
+            <JFXButton fx:id="listBids" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#displayBidList" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" style="-fx-background-color: #3a3cFF;" text="My Bids" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>

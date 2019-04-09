@@ -73,20 +73,31 @@ String query = "select * from offer";
         return offers;     }
 
     @Override
-    public Offer create(Offer obj) throws SQLException {
-String query = "insert into offer(PriceMax, Description, Name, Type, Status, PriceMin ) values(?, ?, ?, ?, ?, ?)";
+    public void create(Offer obj) throws SQLException {
+        try{
+            String query = "insert into offer(PriceMax, Description, Name, Type, Status, PriceMin ) values(?, ?, ?, ?, ?, ?)";
         PreparedStatement pst = cnx.prepareStatement(query);
         pst.setDouble(1, obj.getId());
         pst.setDouble(2, obj.getPriceMax());
         pst.setString(3, obj.getDescription());
-        pst.setString(4, obj.getLocation());
-        pst.setString(4, obj.getName());
-        pst.setString(4, obj.getType());
-        pst.setString(4, obj.getStatus());
-        pst.setDouble(2, obj.getPriceMin());
-          
+        pst.setString(5, obj.getLocation());
+        pst.setString(6, obj.getName());
+        pst.setString(7, obj.getType());
+        pst.setString(8, obj.getStatus());
+        pst.setDouble(9, obj.getPriceMin());          
         pst.executeUpdate();
-        return obj;        }
+      
+                    }
+         catch (SQLException ex){
+             System.out.println("erreur create");
+
+         }
+               
+    
+    }
+   
+            
+       
 
     @Override
     public void update(Offer obj) throws SQLException {

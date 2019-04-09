@@ -39,8 +39,6 @@ public class Dashboard_FreelancerController implements Initializable {
     @FXML
     private JFXButton list_espace;
     @FXML
-    private JFXButton list_tickets1;
-    @FXML
     private JFXButton list_tickets;
     @FXML
     private JFXButton list_tickets2;
@@ -50,6 +48,8 @@ public class Dashboard_FreelancerController implements Initializable {
     private ImageView profilephoto;
     @FXML
     private VBox pnl_scroll;
+    @FXML
+    private JFXButton listBids;
 
     /**
      * Initializes the controller class.
@@ -85,6 +85,11 @@ public class Dashboard_FreelancerController implements Initializable {
 
     @FXML
     private void logout(ActionEvent event) {
+    }
+
+    @FXML
+    private void displayBidList(ActionEvent event) {
+        
     }
     
 }
