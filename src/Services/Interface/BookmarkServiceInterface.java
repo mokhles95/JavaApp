@@ -8,6 +8,7 @@ package Services.Interface;
 import Entities.Bookmark;
 import Entities.Project;
 import Entities.User;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,5 +17,5 @@ import Entities.User;
 public interface BookmarkServiceInterface {
     public boolean addBookmark(Bookmark bookmark);
     public boolean deleteBookmark(Bookmark bookmark);
-    public void displayBookmarks();
+    public ArrayList<Bookmark> displayBookmarks();
 }

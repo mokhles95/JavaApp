@@ -5,6 +5,7 @@
  */
 package Services.Implementation;
 
+import Entities.Bid;
 import Entities.Bookmark;
 import Entities.Project;
 import Entities.User;
@@ -19,6 +20,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,14 +28,15 @@ import java.util.logging.Logger;
  *
  * @author asus
  */
-public class BookmarkService implements BookmarkServiceInterface{
-     private static PreparedStatement preparedStatement;
+public class BookmarkService implements BookmarkServiceInterface {
+
+    private static PreparedStatement preparedStatement;
     private static Statement statement;
     private static ResultSet resultSet;
-    Connection cnx = DataSource.dbConnexion();   
+    Connection cnx = DataSource.dbConnexion();
     private static final Logger logger = Logger.getLogger(AuthenticationService.class.getName());
-    
-    private static BookmarkService bookmarkServiceInstance;
+
+    /*private static BookmarkService bookmarkServiceInstance;
 
     
     private BookmarkService(){}
@@ -43,110 +46,101 @@ public class BookmarkService implements BookmarkServiceInterface{
             bookmarkServiceInstance=new BookmarkService();
         return bookmarkServiceInstance;
     }
-   
-
+     */
     @Override
-    public void displayBookmarks() {
-        try{
-    	cnx.setAutoCommit(false);
-        String query = "SELECT * FROM bookmark";
-        statement = cnx.createStatement();
+    public ArrayList<Bookmark> displayBookmarks() {
+        ArrayList<Bookmark> bookmarks = new ArrayList();
+        try {
+            cnx.setAutoCommit(false);
+            String query = "SELECT * FROM bookmark";
+            statement = cnx.createStatement();
+            resultSet = statement.executeQuery(query);
+            if (resultSet.next() == false) {
+                System.out.println("ResultSet in empty in Java");
+            } else {
+                do {
+                    //for (int i = 1; i <= resultMetaData.getColumnCount(); i++) {
+                        Bookmark bookmark = new Bookmark(resultSet.getInt("id"),resultSet.getInt("project_id"),resultSet.getInt("freelancer_id"),resultSet.getDate("dateAdded"));
+                        bookmarks.add(bookmark);
+                    //}
+                } while (resultSet.next());
+                return bookmarks;
 
-        //int counter = 1;            
-        //preparedStatement.setString(counter++, email);
-        //preparedStatement.setString(counter++, username);
-        resultSet = statement.executeQuery(query);
-        ResultSetMetaData resultMetaData = resultSet.getMetaData();
-        while (resultSet.next()) {
-            
-            for (int i = 1; i <= resultMetaData.getColumnCount(); i++) {
-                //return "?";
-                System.out.println(resultSet.getString(i));
             }
-        }
-            //return resultSet.next();
-            //UserSession userSession = UserSession.getInstace(username, privileges);
-            //return true;
-
-        }catch (SQLException exception) {
+        } catch (SQLException exception) {
             System.out.println(exception.getMessage());
-			logger.log(Level.SEVERE, exception.getMessage());
+            logger.log(Level.SEVERE, exception.getMessage());
 
+        }
+        return bookmarks;
     }
-    }    
 
     @Override
     public boolean deleteBookmark(Bookmark bookmark) {
         boolean deleted = false;
-            try{
+        try {
             int bookmarkId;
-            if (bookmark != null)
-            {
+            if (bookmark != null) {
                 bookmarkId = bookmark.getId();
-                String query = "DELETE FROM bookmark WHERE id = ?";                
+                String query = "DELETE FROM bookmark WHERE id = ?";
                 preparedStatement = cnx.prepareStatement(query);
 
                 preparedStatement.setInt(1, bookmarkId);
                 preparedStatement.executeUpdate();
-               deleted = true;
+                deleted = true;
             }
-                
-            
 
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+            logger.log(Level.SEVERE, exception.getMessage());
 
-            }catch (SQLException exception) {
-                System.out.println(exception.getMessage());
-                            logger.log(Level.SEVERE, exception.getMessage());
+        }
+        return deleted;
+    }
 
-        } 
-    return deleted;
-}
-
-   
-     @Override
+    @Override
     public boolean addBookmark(Bookmark bookmark) {
-            try{
+        try {
             //cnx.setAutoCommit(false);
             String query = "INSERT INTO bookmark VALUES(default,?,?,?)";
             preparedStatement = cnx.prepareStatement(query);
             //preparedStatement.addBatch();
             //preparedStatement.executeBatch();
-            int counter = 1;            
+            int counter = 1;
             Date date = CurrentDate.getCurrentDate();
             preparedStatement.setInt(counter++, bookmark.getFreelancerId());
             preparedStatement.setInt(counter++, bookmark.getProjectId());
             preparedStatement.setDate(counter++, date);
-            
-            if (preparedStatement.executeUpdate() > 0 )
-                
-                return true;
-            else
-                return false;
 
-            }catch (SQLException exception) {
-                System.out.println(exception.getMessage());
-                            logger.log(Level.SEVERE, exception.getMessage());
+            if (preparedStatement.executeUpdate() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+            logger.log(Level.SEVERE, exception.getMessage());
 
         } finally {
-            if (preparedStatement!= null)
-              try {
-                  preparedStatement.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            if (cnx!= null)
-              try {
-                  cnx.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-          }
+        }
 
-        return false;    
-    
+        return false;
+
+    }
+
 }
-
-   
-}    
-    
-

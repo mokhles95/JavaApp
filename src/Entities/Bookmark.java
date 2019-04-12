@@ -23,7 +23,13 @@ public class Bookmark implements Serializable {
     
     private int freelancerId;
     
-    
+    public Bookmark(int id, int projectId, int freelancerId, Date dateAdded) {
+        this.id = id;
+        this.dateAdded = CurrentDate.getCurrentDate();
+        this.projectId = projectId;
+        this.freelancerId = freelancerId;
+        
+    }
 
     public Bookmark(int id, int projectId, int freelancerId) {
         this.id = id;
@@ -32,9 +38,10 @@ public class Bookmark implements Serializable {
         this.freelancerId = freelancerId;
     }
 
-    public Bookmark(int projectId, int freelancerId) {
+    
+    public Bookmark(int projectId, Date dateAdded) {
         this.projectId = projectId;
-        this.freelancerId = freelancerId;
+        this.dateAdded = dateAdded;
     }
     
     

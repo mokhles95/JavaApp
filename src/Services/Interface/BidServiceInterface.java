@@ -6,14 +6,15 @@
 package Services.Interface;
 
 import Entities.Bid;
+import java.util.ArrayList;
 
 /**
  *
  * @author asus
  */
 public interface BidServiceInterface {
-    public String  displayBids();
+    public ArrayList<Bid>  displayBids();
     public boolean  addBid(Bid bid);
-    public boolean deleteBid(int idBid);
+    public boolean deleteBid(Bid bid);
     public boolean updateBid(Bid bid);
 }

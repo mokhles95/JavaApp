@@ -5,20 +5,18 @@
  */
 package Entities;
 
-
-
 public class Bid {
 
     private static final long serialVersionUID = 1L;
-    
-    private Integer id;
-    
+
+    private int id;
+
     private int minimalRate;
-    
+
     private int deliveryTime;
-    
+
     private int projectId;
-    
+
     private int freelancerId;
 
     public int getProjectId() {
@@ -40,27 +38,41 @@ public class Bid {
     public Bid() {
     }
 
-    public Bid(Integer id) {
+    public Bid(int id) {
         this.id = id;
     }
-    public Bid(Integer id, int minimalRate, int deliveryTime) {
-        this.id = id;
+
+    public Bid(int minimalRate, int deliveryTime) {
         this.minimalRate = minimalRate;
         this.deliveryTime = deliveryTime;
     }
 
-    public Bid(int minimalRate, int deliveryTime, int freelancerId,int projectId) {
+    public Bid(int id, int minimalRate, int deliveryTime, int projectId, int freelancerId) {
+        this.id = id;
         this.minimalRate = minimalRate;
         this.deliveryTime = deliveryTime;
         this.freelancerId = freelancerId;
         this.projectId = projectId;
     }
 
-    public Integer getId() {
+    public Bid(int minimalRate, int deliveryTime, int freelancerId, int projectId) {
+        this.minimalRate = minimalRate;
+        this.deliveryTime = deliveryTime;
+        this.freelancerId = freelancerId;
+        this.projectId = projectId;
+    }
+
+    public Bid(int minimalRate, int deliveryTime, int projectId) {
+        this.minimalRate = minimalRate;
+        this.deliveryTime = deliveryTime;
+        this.projectId = projectId;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -80,31 +92,9 @@ public class Bid {
         this.deliveryTime = deliveryTime;
     }
 
-   
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Bid)) {
-            return false;
-        }
-        Bid other = (Bid) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public String toString() {
-        return "Entities.Bid_1[ id=" + id + " ]";
+        return "Bid{" + "minimalRate=" + minimalRate + ", deliveryTime=" + deliveryTime + ", projectId=" + projectId + ", freelancerId=" + freelancerId + '}';
     }
-    
+
 }

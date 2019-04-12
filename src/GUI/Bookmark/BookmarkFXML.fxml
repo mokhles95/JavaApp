@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Bookmark.BookmarkFXMLController">
+    <children>
+        <VBox layoutX="26.0" layoutY="19.0" prefHeight="281.0" prefWidth="542.0" spacing="10.0">
+            <children>
+                <Label text="TableView Object">
+                    <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                    </font>
+                </Label>
+                <TableView fx:id="tableView" onMouseClicked="#userClickedOnTable" prefHeight="250.0" prefWidth="290.0">
+                    <columns>
+                        <TableColumn fx:id="projectIdColumn" prefWidth="154.0" text="Delivery Time" />
+                        <TableColumn fx:id="dateAddedColumn" prefWidth="120.0" text="Minimal Rate" />
+                    </columns>
+
+                </TableView>
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#deleteButtonPushed" prefWidth="175.0" text="Delete Bookmark(s) " />
+
+                    </children>
+                    
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
