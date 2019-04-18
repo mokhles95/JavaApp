@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MokhlessRegister.RegisterController">
+    <children>
+        <Pane prefHeight="400.0" prefWidth="162.0" style="-fx-background-color: #7094db;" />
+        <TextField fx:id="txtFirstName" layoutX="194.0" layoutY="107.0" prefHeight="25.0" prefWidth="212.0" promptText="First Name" />
+        <TextField fx:id="txtLastName" layoutX="194.0" layoutY="150.0" prefHeight="25.0" prefWidth="212.0" promptText="Last Name" />
+        <TextField fx:id="txtUserName" layoutX="194.0" layoutY="196.0" prefHeight="25.0" prefWidth="212.0" promptText="User Name" />
+        <TextField fx:id="txtEmail" layoutX="194.0" layoutY="242.0" prefHeight="25.0" prefWidth="212.0" promptText="email" />
+        <Label layoutX="181.0" layoutY="6.0" prefHeight="35.0" prefWidth="95.0" text="Register" textFill="#7094db">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <FontAwesomeIconView glyphName="USER" layoutX="385.0" layoutY="124.0" size="1em" />
+        <Button fx:id="btnSave" layoutX="483.0" layoutY="346.0" mnemonicParsing="false" onAction="#HandleBtnSave" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: #7094db;" text="Save" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+        <FontAwesomeIconView glyphName="ENVELOPE" layoutX="382.0" layoutY="216.0" size="1em" />
+        <FontAwesomeIconView glyphName="USER" layoutX="388.0" layoutY="168.0" size="1em" />
+        <PasswordField fx:id="password" layoutX="194.0" layoutY="285.0" prefHeight="25.0" prefWidth="212.0" promptText="password" />
+        <FontAwesomeIconView glyphName="LOCK" layoutX="389.0" layoutY="259.0" />
+        <PasswordField fx:id="password1" layoutX="194.0" layoutY="333.0" prefHeight="25.0" prefWidth="212.0" promptText="Repeat password" />
+        <RadioButton fx:id="employerType" layoutX="194.0" layoutY="69.0" mnemonicParsing="false" text="Employer" />
+        <RadioButton fx:id="freelancerType" layoutX="346.0" layoutY="69.0" mnemonicParsing="false" text="Freelancer" />
+        
+        
+    </children>
+</AnchorPane>

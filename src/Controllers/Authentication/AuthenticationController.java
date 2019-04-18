@@ -2,12 +2,12 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+
 package Controllers.Authentication;
 
 import Entities.User;
 import Services.Implementation.AuthenticationService;
-import Tools.AlertHelper;
+import Utils.AlertHelper;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
@@ -21,12 +21,12 @@ import javafx.stage.Window;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 
-
+ */
 /**
  * FXML Controller class
  *
  * @author asus
- */
+
 public class AuthenticationController implements Initializable {
 
     @FXML
@@ -55,9 +55,6 @@ public class AuthenticationController implements Initializable {
     private RadioButton freelancerType;
 
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -127,8 +124,18 @@ public class AuthenticationController implements Initializable {
                     "Your password and password confirmation must be the same");
         }else
         {
+             String accountType = "";
+        
+            if (employerType.isSelected())
+            {
+                accountType += "employer";
+            }
+            else if (freelancerType.isSelected())
+            {
+                accountType += "freelancer";
+            }
             BooleanProperty type = employerType.selectedProperty();
-            User user = new User(emailText.getText(),type);
+            User user = new User(emailText.getText(),accountType,usernameText.getText(), passwordText.getText());
             if (authenticationService.register(user))
         {
             AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Registration Successful!", 
@@ -143,6 +150,59 @@ public class AuthenticationController implements Initializable {
 
     }
     
+    @FXML
+    private void register(ActionEvent event) {
+        Window owner = signupBtn.getScene().getWindow();
+        if(emailText.getText().isEmpty()) {
+            Tools.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", 
+                    "Please enter your email");
+            return;
+        }
+       
+       if(passwordText.getText().isEmpty()) {
+            Tools.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", 
+                    "Please enter your password");
+            return;
+        }
+       
+        if(freelancerType.getText().isEmpty()) {
+            Tools.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", 
+                    "Please enter your password");
+            return;
+        }
+        
+        if(usernameText.getText().isEmpty()) {
+            Tools.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", 
+                    "Please enter your password");
+            return;
+        }
+        String accountType = "";
+        
+            if (employerType.isSelected())
+            {
+                accountType += "employer";
+            }
+            else if (freelancerType.isSelected())
+            {
+                accountType += "freelancer";
+            }
+            User user = new User(emailText.getText(),accountType, usernameText.getText(), passwordText.getText());
+            String msg = authenticationService.register(user);
+            if (msg.isEmpty())
+        {
+            Tools.AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Registration Successful!", 
+                "Welcome ");
+        }
+        else{
+            Tools.AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Registration Error!", 
+                msg);
+        }
+        }
+        
 
+    }
+    *  */
     
-}
+    
+
+   

@@ -5,81 +5,81 @@
  */
 package Controllers.Bid;
 
+/**
+ *
+ * @author asus
+ */
 import Entities.Bid;
 import Services.Implementation.BidService;
+import Tools.SwitchView;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
- * @author asus
+ * @author jwright
  */
 public class BidController implements Initializable {
 
     @FXML
-    private TreeTableView<?> tab;
+    private AnchorPane containerBidsAnchor;
     @FXML
-    private TreeTableColumn<?, ?> projectColumn;
-    @FXML
-    private TreeTableColumn<?, ?> minimalRateColumn;
-    @FXML
-    private TreeTableColumn<?, ?> deliveryTimeColumn;
+    private VBox dynamicVbox;
+
+    BidService bidService = BidService.getInstance();
+    SwitchView switchView = SwitchView.getInstance();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ArrayList<Bid> bids = bidService.displayBids();
+        try {
 
-        //set up the columns in the table
-        /*ProjectNameColumn.setCellValueFactory(new PropertyValueFactory<>("ProjectNameColumn"));
-        MinimalRateColumn.setCellValueFactory(new PropertyValueFactory<>("MinimalRateColumn"));
-        DeliveryTimeColumn.setCellValueFactory(new PropertyValueFactory<>("DeliveryTimeColumn"));*/
-        projectColumn = new TreeTableColumn<Bid, String>("ProjectNameColumn");
-        minimalRateColumn = new TreeTableColumn<Bid, String>("MinimalRateColumn");
-        deliveryTimeColumn = new TreeTableColumn<Bid, String>("DeliveryTimeColumn");
+            for (Bid bid : bids) {
+                //System.out.println(bid.getId());
+                dynamicVbox.getChildren().add(addBidView(bid));
+            }
 
-        // Add columns to TreeTable.
-        //bidTab.getColumns().addAll(projectColumn, minimalRateColumn, deliveryTimeColumn);
-
-        //load dummy data
-        ObservableList<Bid> bids = FXCollections.observableArrayList();
-
-        bids = getBidList();
-        //tab.(bids);
-        // bidsTable.getColumns().addAll(ProjectNameColumn, MinimalRateColumn, DeliveryTimeColumn);
-        // bidsTable.setItems(getBidList());
-
-        //Update the table to allow for the first and last name fields
-        //to be editable
-        //This will allow the table to select multiple rows at once
-        //bidsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        //Disable the detailed person view button until a row is selected
-        //this.detailedPersonViewButton.setDisable(true); 
-    }
-
-    public ObservableList<Bid> getBidList() {
-        ObservableList<Bid> bids = FXCollections.observableArrayList();
-        ArrayList<Bid> bid;
-        //bid = bidService.displayBids();
-        //bids.addAll(bid);
-        System.out.println("get bid" + bids.toString());
-        return bids;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
     }
 
+    public Parent addBidView(Bid bid) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("GUI/Bid/SingleBid.fxml"));
+        Parent root = (Parent) loader.load();
+        SingleBidController singleBidController = loader.getController();
+        singleBidController.transferSingleBid(bid);
+        return root;
+    }
+
+    /**
+     * When this method is called, it will change the Scene to a TableView
+     * example
+     *
+     * public void changeScreenButtonPushed(ActionEvent event) throws
+     * IOException { Parent tableViewParent =
+     * FXMLLoader.load(getClass().getResource("FXMLDocument.fxml")); Scene
+     * tableViewScene = new Scene(tableViewParent);
+     *
+     * //This line gets the Stage information Stage window = (Stage) ((Node)
+     * event.getSource()).getScene().getWindow();
+     *
+     * window.setScene(tableViewScene); window.show(); }
+     *
+     */
 }

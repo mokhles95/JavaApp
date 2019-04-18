@@ -4,7 +4,6 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,20 +11,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="pane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="623.0" prefWidth="1271.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Dashboard.Dashboard_FreelancerController">
+<AnchorPane id="AnchorPane" fx:id="windowPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Dashboard.Dashboard_FreelancerController">
    <children>
-      <Pane layoutX="-1.0" prefHeight="147.0" prefWidth="1277.0" style="-fx-background-color: #3a3cFF;" styleClass="head-background" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="150.0" prefWidth="1200.0" style="-fx-background-color: #3a3cFF;" styleClass="head-background">
          <children>
-            <Label fx:id="name" layoutX="224.0" layoutY="47.0" textFill="WHITE">
+            <Label fx:id="name" layoutX="224.0" layoutY="47.0" text="username" textFill="WHITE">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <VBox layoutX="-1.0" layoutY="146.0" prefHeight="477.0" prefWidth="246.0" style="-fx-background-color: #3a3cFf;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">
+      <VBox layoutX="-1.0" layoutY="146.0" prefHeight="450.0" prefWidth="250.0" style="-fx-background-color: #3a3cFf;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">
          <children>
-            <Label prefHeight="30.0" prefWidth="252.0" textFill="#171717">
+            <Label prefHeight="30.0" prefWidth="252.0" text="WELCOME username" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
@@ -94,7 +93,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="BARS" size="16" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="listBids" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#displayBidList" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" style="-fx-background-color: #3a3cFF;" text="My Bids" textFill="WHITE">
+            <JFXButton fx:id="bidNavigation" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#displayBidList" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" style="-fx-background-color: #3a3cFF;" text="My Bids" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
@@ -143,7 +142,7 @@
             <DropShadow />
          </effect>
       </VBox>
-      <Pane layoutX="71.0" layoutY="44.0" prefHeight="131.0" prefWidth="142.0" style="-fx-background-color: #fff;">
+      <Pane fx:id="logo" layoutX="71.0" layoutY="44.0" prefHeight="131.0" prefWidth="142.0" style="-fx-background-color: #fff;">
          <effect>
             <DropShadow blurType="GAUSSIAN" height="10.0" radius="4.5" width="10.0" />
          </effect>
@@ -151,10 +150,6 @@
             <ImageView fx:id="profilephoto" fitHeight="131.0" fitWidth="145.0" layoutX="-1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <AnchorPane fx:id="contentPane" layoutX="245.0" layoutY="147.0" prefHeight="477.0" prefWidth="1029.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="147.0">
-         <children>
-            <ScrollPane fx:id="dynamicNode" prefHeight="476.0" prefWidth="1029.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
+      <Pane fx:id="content" layoutX="250.0" layoutY="150.0" prefHeight="450.0" prefWidth="950.0" />
    </children>
 </AnchorPane>

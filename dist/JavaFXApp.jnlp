@@ -8,11 +8,15 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JavaFXApp.jar" size="78081" download="eager" />
+    <jar href="JavaFXApp.jar" size="156460" download="eager" />
     <jar href="lib\fontawesomefx-8.9.jar" size="571068" download="eager" />
-    <jar href="lib\jfoenix-8.0.2.jar" size="2442326" download="eager" />
+    <jar href="lib\guava-cache-19.0.0.jar" size="156116" download="eager" />
+    <jar href="lib\jfoenix-8.0.8.jar" size="2708772" download="eager" />
+    <jar href="lib\mail.jar" size="666983" download="eager" />
+    <jar href="lib\mailapi-1.5.0.jar" size="282336" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
-    <jar href="lib\mysql-connector-java-5.1.47-bin.jar" size="1007505" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.47.jar" size="1007502" download="eager" />
+    <jar href="lib\smtp-1.4.4.jar" size="52195" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="JavaFXApp" >
     <param name="requiredFXVersion" value="8.0+"/>

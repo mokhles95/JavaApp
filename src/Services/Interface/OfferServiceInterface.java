@@ -8,6 +8,7 @@ package Services.Interface;
 import Entities.Offer;
 import java.sql.SQLException;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -15,10 +16,11 @@ import java.util.List;
  */
 public interface OfferServiceInterface {
      public abstract Offer get(Offer obj) throws SQLException;
-     public List<Offer> getAll(Offer obj)throws SQLException;
-     public void create(Offer obj)throws SQLException;
+public ObservableList<Offer> OfferList();
+public void create(Offer obj)throws SQLException;
    
-     public void update(Offer obj)throws SQLException;
+     public void update(Offer obj , int x)throws SQLException;
+      public void deleteOffer(int id);
      
     
 }

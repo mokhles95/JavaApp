@@ -52,6 +52,73 @@ public class Offer {
         this.location = location;
         this.priceMax = priceMax;
     }
+    
+    
+   
+    
+    public Offer( String name, int priceMin, int priceMax, String type, String description, String location,String status) {
+        this.name = name;
+        this.priceMin = priceMin;
+        this.priceMax = priceMax;
+        this.type = type;
+        this.description = description;
+        this.location = location;
+        this.status = status;
+        
+       
+    }
+    
+    public Offer( int id,String name, int priceMax, String type) {
+        this.name = name;
+        this.priceMax = priceMax;
+        this.type = type;
+        this.id = id;
+        
+        
+       
+    }
+
+    public Offer(Integer id, String name, String type, String location, int priceMax) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.location = location;
+        this.priceMax = priceMax;
+       
+    }
+    
+
+    public Offer(Integer id, String name, int priceMin, String type, String description, String status, String location, Date dateCreation, int priceMax, Category categoryId) {
+        this.id = id;
+        this.name = name;
+        this.priceMin = priceMin;
+        this.type = type;
+        this.description = description;
+        this.status = status;
+        this.location = location;
+        this.dateCreation = dateCreation;
+        this.priceMax = priceMax;
+        this.categoryId = categoryId;
+    }
+
+    
+   
+
+    
+
+    public Offer(int aInt, int aInt0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Offer(Integer id, String name, String type, String status, String location, int priceMax) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.status = status;
+        this.location = location;
+        this.priceMax = priceMax;
+    }
+
 
     public Integer getId() {
         return id;

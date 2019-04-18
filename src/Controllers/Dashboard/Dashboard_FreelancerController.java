@@ -5,12 +5,14 @@
  */
 package Controllers.Dashboard;
 
-import Tools.AlertHelper;
-import Tools.SwitchView;
+import Utils.AlertHelper;
+import Utils.SwitchView;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 
 /**
@@ -31,8 +34,6 @@ import javafx.stage.Window;
  */
 public class Dashboard_FreelancerController implements Initializable {
 
-    @FXML
-    private AnchorPane pane;
     @FXML
     private Label name;
     @FXML
@@ -52,15 +53,15 @@ public class Dashboard_FreelancerController implements Initializable {
     @FXML
     private ImageView profilephoto;
     @FXML
-    private JFXButton listBids;
-    @FXML
-    private AnchorPane contentPane;
-    @FXML
-    private ScrollPane dynamicNode;
-
-    private String currentlyInDynamicPane;//not important
-    @FXML
     private JFXButton listBookmarks;
+    @FXML
+    private AnchorPane windowPane;
+    @FXML
+    private JFXButton bidNavigation;
+    @FXML
+    private Pane logo;
+    @FXML
+    private Pane content;
 
     /**
      * Initializes the controller class.
@@ -92,6 +93,12 @@ public class Dashboard_FreelancerController implements Initializable {
 
     @FXML
     private void openlist_tickets(ActionEvent event) {
+        
+        try {
+            loadViewContent("GUI/Project/Project.fxml", windowPane,content);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     @FXML
@@ -100,32 +107,30 @@ public class Dashboard_FreelancerController implements Initializable {
 
     @FXML
     private void displayBidList(ActionEvent event) {
-        //SwitchView switchView = new SwitchView();
-        //switchView.switchView(dynamicNode);
-        //Window owner = listBids.getScene().getWindow();
         try {
-            Node node = (Node) FXMLLoader.load(getClass().getClassLoader().getResource("GUI/BidTest/BidTest.fxml"));
-            //.getClassLoader()
-
-            dynamicNode.setContent(node);
-
-        } catch (IOException ioex) {
-            System.out.println(ioex.getMessage());
+            loadViewContent("/GUI/Bid/Bid.fxml", windowPane,content);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
-
     }
 
     @FXML
     private void displayBookmarkList(ActionEvent event) {
+
         try {
-            Node node = (Node) FXMLLoader.load(getClass().getClassLoader().getResource("GUI/Bookmark/BookmarkFXML.fxml"));
-            //.getClassLoader()
-            dynamicNode.setContent(node);
-
-        } catch (IOException ioex) {
-            System.out.println(ioex.getMessage());
+            loadViewContent("GUI/Bookmark/Bookmark.fxml", windowPane,content);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
-
     }
-
+    private void loadViewContent(String path,AnchorPane root,Pane content) throws IOException{
+            content = FXMLLoader.load(getClass().getResource(path));
+            root.getChildren().set(3, content);
+            content.setLayoutX(250);
+            content.setLayoutY(150);
+        }
+    
 }
+
+
+

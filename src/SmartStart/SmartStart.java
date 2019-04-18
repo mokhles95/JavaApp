@@ -5,17 +5,16 @@ package SmartStart;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import Controllers.Dashboard.Dashboard_FreelancerController;
-import Entities.Bid;
-import Entities.Bookmark;
-import Services.Implementation.BidService;
-import Services.Implementation.BookmarkService;
-import java.util.ArrayList;
+
+import Services.Implementation.OfferService;
+import java.io.IOException;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -23,22 +22,45 @@ import javafx.stage.Stage;
  */
 public class SmartStart extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/Dashboard/Dashboard_Freelancer.fxml"));
-        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+ private Stage stage;
+    private static SmartStart instance;
+    private Scene scene;
+    public SmartStart() throws IOException, InterruptedException {
+        instance = this;
+        scene = new Scene(FXMLLoader.load(getClass().getResource("/GUI/Offer/OfferList.fxml")));
+    }
+     public static SmartStart getInstance() {
+        return instance;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+    
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+       this.stage = stage;
+        stage.setScene(this.scene);
+        stage.initStyle(StageStyle.DECORATED);
+        stage.centerOnScreen();
+        stage.show(); 
+    }
+public void changescene(Scene scene) {
+        this.scene = scene;
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws SQLException {
+        //OfferService os = new OfferService();
+        //Offer o = new Offer("Ahmed el din", 558, 55555, "aaaa", "aaaa", "dazdazd", "En attente");
+        //os.OfferList();
+        
         launch(args);
-
+          
     }
-
 }

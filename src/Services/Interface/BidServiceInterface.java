@@ -13,8 +13,19 @@ import java.util.ArrayList;
  * @author asus
  */
 public interface BidServiceInterface {
-    public ArrayList<Bid>  displayBids();
-    public boolean  addBid(Bid bid);
+
+    public ArrayList<Bid> displayBids();
+
+    public boolean addBid(Bid bid);
+
     public boolean deleteBid(Bid bid);
+
     public boolean updateBid(Bid bid);
+    
+    //public boolean updateDeliveryTimeBid(Bid bid);
+    
+    //public boolean updateMinimalRateBid();
+
+    public Bid findById(int id);
+
 }

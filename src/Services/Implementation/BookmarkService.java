@@ -34,9 +34,9 @@ public class BookmarkService implements BookmarkServiceInterface {
     private static Statement statement;
     private static ResultSet resultSet;
     Connection cnx = DataSource.dbConnexion();
-    private static final Logger logger = Logger.getLogger(AuthenticationService.class.getName());
+    private static final Logger logger = Logger.getLogger(BookmarkService.class.getName());
 
-    /*private static BookmarkService bookmarkServiceInstance;
+    private static BookmarkService bookmarkServiceInstance;
 
     
     private BookmarkService(){}
@@ -46,7 +46,7 @@ public class BookmarkService implements BookmarkServiceInterface {
             bookmarkServiceInstance=new BookmarkService();
         return bookmarkServiceInstance;
     }
-     */
+     
     @Override
     public ArrayList<Bookmark> displayBookmarks() {
         ArrayList<Bookmark> bookmarks = new ArrayList();

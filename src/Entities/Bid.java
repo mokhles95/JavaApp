@@ -16,6 +16,16 @@ public class Bid {
     private int deliveryTime;
 
     private int projectId;
+    
+    private Project project;
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 
     private int freelancerId;
 
@@ -72,9 +82,7 @@ public class Bid {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public int getMinimalRate() {
         return minimalRate;

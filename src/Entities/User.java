@@ -31,6 +31,14 @@ public class User {
         this.username_canonical = username.toLowerCase();
         this.email_canonical = email.toLowerCase();
         this.enabled = true;
+        if (this.type.equalsIgnoreCase("freelancer"))
+        {
+            roles += "freelancer";
+        }
+        else
+        {
+            roles+= "employer" ;
+        }
 
         
     }

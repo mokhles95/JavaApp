@@ -5,10 +5,12 @@
  */
 package Controllers.Bookmark;
 
+import Controllers.Bid.SingleBidController;
 import Entities.Bid;
 import Entities.Bookmark;
 import Services.Implementation.BidService;
 import Services.Implementation.BookmarkService;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,53 +19,60 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author asus
  */
-public class BookmarkFXMLController implements Initializable {
+public class BookmarkController implements Initializable {
 
-    @FXML
     private TableView<Bookmark> tableView;
     @FXML
-    private TableColumn<Bookmark, Integer> projectIdColumn;
+    private AnchorPane containerBidsAnchor;
     @FXML
-    private TableColumn<Bookmark, Date> dateAddedColumn;
-
+    private VBox dynamicVbox;
+    
+    BookmarkService bookmarkService =  BookmarkService.getInstance();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dateAddedColumn.setCellValueFactory(new PropertyValueFactory<>("dateAdded"));
-        projectIdColumn.setCellValueFactory(new PropertyValueFactory<>("project_id"));
-        tableView.setItems(getBookmarks());
-        tableView.setEditable(true);
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        ArrayList<Bookmark> bookmarks = bookmarkService.displayBookmarks();
+        try {
+
+            for (Bookmark bookmark : bookmarks) {
+                dynamicVbox.getChildren().add(addBookmarkView(bookmark));
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
     }
-
-    @FXML
-    private void changeScreenButtonPushed(ActionEvent event) {
+    
+    public Parent addBookmarkView(Bookmark bookmark) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("GUI/Bookmark/SingleBookmark.fxml"));
+        Parent root = (Parent) loader.load();
+        SingleBookmarkController singleBookmarkController = loader.getController();
+        singleBookmarkController.transferSingleBookmark(bookmark);
+        return root;
     }
 
-    @FXML
-    private void userClickedOnTable(MouseEvent event) {
-    }
-
-    @FXML
     public void deleteButtonPushed() {
-        BookmarkService bookmarkService = new BookmarkService();
         ObservableList<Bookmark> selectedRows, allBookmarks;
         allBookmarks = tableView.getItems();
 
@@ -79,7 +88,6 @@ public class BookmarkFXMLController implements Initializable {
 
     public ObservableList<Bookmark> getBookmarks() {
         ObservableList<Bookmark> bookmarks = FXCollections.observableArrayList();
-        BookmarkService bookmarkService = new BookmarkService();
         ArrayList<Bookmark> bookmark;
         bookmark = bookmarkService.displayBookmarks();
         bookmarks.addAll(bookmark);

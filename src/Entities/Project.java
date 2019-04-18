@@ -9,38 +9,38 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
-
-
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
-   
-    private Integer id;
-    
+
+    private int id;
+
     private String projectName;
-    
-    private double minBudget;
-    
-    private double maxBudget;
-    
+
+    //private double minBudget;
+    //private double maxBudget;
+    private int minBudget;
+
+    private int maxBudget;
+
     private String projectLocation;
-    
+
     private String projectDescription;
-    
+
     private Date publishingDate;
-    
+
     private Date validityPeriod;
-   
+
     private Collection<ReviewEmp> reviewEmpCollection;
-    
+
     private FosUser employerId;
-    
+
     private FreelancersBookmark freelancersBookmark;
-    
+
     private Collection<Bookmark> bookmarkCollection;
-    
+
     private Collection<Review> reviewCollection;
-    
+
     private Collection<Bid> bidCollection;
 
     public Project() {
@@ -48,6 +48,33 @@ public class Project implements Serializable {
 
     public Project(Integer id) {
         this.id = id;
+    }
+
+    public Project(int id, String projectName, int minBudget, int maxBudget, Date validityPeriod) {
+        this.projectName = projectName;
+        this.minBudget = minBudget;
+        this.maxBudget = maxBudget;
+        this.validityPeriod = validityPeriod;
+        this.id = id;
+
+    }
+
+    public Project(Integer id, String projectName, int minBudget, int maxBudget, String projectLocation, String projectDescription, Date publishingDate, Date validityPeriod) {
+        this.id = id;
+        this.projectName = projectName;
+        this.minBudget = minBudget;
+        this.maxBudget = maxBudget;
+        this.projectLocation = projectLocation;
+        this.projectDescription = projectDescription;
+        this.publishingDate = publishingDate;
+        this.validityPeriod = validityPeriod;
+    }
+
+    /*public Project(String projectName, double minBudget, double maxBudget) {
+        this.projectName = projectName;
+        this.minBudget = minBudget;
+        this.maxBudget = maxBudget;
+
     }
 
     public Project(Integer id, String projectName, double minBudget, double maxBudget, String projectLocation, String projectDescription, Date publishingDate, Date validityPeriod) {
@@ -59,8 +86,7 @@ public class Project implements Serializable {
         this.projectDescription = projectDescription;
         this.publishingDate = publishingDate;
         this.validityPeriod = validityPeriod;
-    }
-
+    }*/
     public Integer getId() {
         return id;
     }
@@ -77,19 +103,19 @@ public class Project implements Serializable {
         this.projectName = projectName;
     }
 
-    public double getMinBudget() {
+    public int getMinBudget() {
         return minBudget;
     }
 
-    public void setMinBudget(double minBudget) {
+    public void setMinBudget(int minBudget) {
         this.minBudget = minBudget;
     }
 
-    public double getMaxBudget() {
+    public int getMaxBudget() {
         return maxBudget;
     }
 
-    public void setMaxBudget(double maxBudget) {
+    public void setMaxBudget(int maxBudget) {
         this.maxBudget = maxBudget;
     }
 
@@ -174,28 +200,8 @@ public class Project implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Project)) {
-            return false;
-        }
-        Project other = (Project) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "Entities.Project_1[ id=" + id + " ]";
+        return "Project{" + "id=" + id + ", projectName=" + projectName + ", minBudget=" + minBudget + ", maxBudget=" + maxBudget + ", projectLocation=" + projectLocation + ", projectDescription=" + projectDescription + ", publishingDate=" + publishingDate + ", validityPeriod=" + validityPeriod + ", reviewEmpCollection=" + reviewEmpCollection + ", employerId=" + employerId + ", freelancersBookmark=" + freelancersBookmark + ", bookmarkCollection=" + bookmarkCollection + ", reviewCollection=" + reviewCollection + ", bidCollection=" + bidCollection + '}';
     }
-    
+
 }

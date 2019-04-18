@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Offer.EmployerOffersController">
+   <children>
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="68.0" prefHeight="296.0" prefWidth="377.0">
+        <columns>
+          <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="colType" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="colSalary" prefWidth="75.0" text="Salary" />
+            <TableColumn fx:id="colLocation" prefWidth="75.0" text="Location" />
+            <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
+            <TableColumn fx:id="colId" minWidth="0.0" prefWidth="0.0" text="Id" />
+        </columns>
+      </TableView>
+      <Label layoutX="67.0" layoutY="20.0" prefHeight="25.0" prefWidth="67.0" text="Offers">
+         <font>
+            <Font name="System Italic" size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnAbdate" layoutX="118.0" layoutY="372.0" mnemonicParsing="false" onAction="#update" prefHeight="36.0" prefWidth="103.0" style="-fx-background-color: #051D01;" text="Update" textFill="#f2eeee" />
+      <FontAwesomeIconView fill="#e4e0e0" glyphName="EDIT" layoutX="122.0" layoutY="398.0" size="2em" />
+      <Button fx:id="btnDelete" layoutX="239.0" layoutY="372.0" mnemonicParsing="false" onAction="#delete" prefHeight="36.0" prefWidth="39.0" style="-fx-background-color: #FC1300;" />
+      <FontAwesomeIconView fill="#bfbdbd" glyphName="TRASH" layoutX="251.0" layoutY="396.0" size="1.5em" />
+      <TextField fx:id="txtName" layoutX="500.0" layoutY="44.0" />
+      <Button fx:id="btnAdd" layoutX="535.0" layoutY="284.0" mnemonicParsing="false" onAction="#add" prefHeight="36.0" prefWidth="79.0" style="-fx-background-color: #0091FC;" text="Save" textFill="#f5f4f4" />
+      <TextField fx:id="textSalary" layoutX="500.0" layoutY="152.0" />
+      <TextField fx:id="textLocation" layoutX="500.0" layoutY="218.0" />
+      <Label layoutX="438.0" layoutY="48.0" text="Name" />
+      <Label layoutX="441.0" layoutY="100.0" text="Type" />
+      <Label layoutX="438.0" layoutY="156.0" text="Salary" />
+      <Label layoutX="431.0" layoutY="222.0" text="Location" />
+      <TextField fx:id="textType" layoutX="500.0" layoutY="96.0" />
+      <FontAwesomeIconView fill="#eaeeee" glyphName="SAVE" layoutX="542.0" layoutY="308.0" size="1.5em" />
+   </children>
+</AnchorPane>

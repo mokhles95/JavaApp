@@ -5,6 +5,7 @@
  */
 package Services.Implementation;
 
+import Entities.Job;
 import Entities.Offer;
 import Services.Interface.OfferServiceInterface;
 import Tools.DataSource;
@@ -15,6 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -26,16 +29,19 @@ public class OfferService implements OfferServiceInterface{
     private static ResultSet resultSet;
     Connection cnx = DataSource.dbConnexion();   
     private static final Logger logger = Logger.getLogger(AuthenticationService.class.getName());
+    ObservableList<Offer> data;
+
     
 
     
-    private OfferService(){}
+    public OfferService(){}
     
     public static OfferService getInstance(){
         if(offerServiceInstance==null) 
             offerServiceInstance=new OfferService();
         return offerServiceInstance;
     }
+    
     
 
     @Override
@@ -45,72 +51,194 @@ public class OfferService implements OfferServiceInterface{
         rs.next();
         obj.setId(rs.getInt("id"));
         obj.setName(rs.getString("name"));
+        obj.setDescription(rs.getString("description"));
+        obj.setStatus(rs.getString("status"));
         obj.setPriceMax(rs.getInt("priceMax"));
         obj.setPriceMin(rs.getInt("priceMin"));
         obj.setLocation(rs.getString("location"));
         obj.setType(rs.getString("type"));
-        obj.setStatus(rs.getString("status"));
+        
+        
         return obj;
-    }
 
+    
+    
+    } 
+     
+    
+    
     @Override
-    public List<Offer> getAll(Offer obj) throws SQLException {
-String query = "select * from offer";
-        ResultSet rs = cnx.createStatement().executeQuery(query);
-        List<Offer> offers = new ArrayList<>();
-        while(rs.next()){
-            Offer offer = new Offer();
-            offer.setId(rs.getInt("id"));
-            offer.setName(rs.getString("name"));
-            offer.setLocation(rs.getString("location"));
-            offer.setType(rs.getString("status"));
-            offer.setDescription(rs.getString("description"));
-            offer.setPriceMax(rs.getInt("PriceMax"));
-            offer.setPriceMin(rs.getInt("PriceMin"));
-
-            offers.add(offer);
-        }
-        return offers;     }
-
-    @Override
-    public void create(Offer obj) throws SQLException {
+    public ObservableList<Offer> OfferList(){
+        ObservableList data;
+        data =  FXCollections.observableArrayList();
         try{
-            String query = "insert into offer(PriceMax, Description, Name, Type, Status, PriceMin ) values(?, ?, ?, ?, ?, ?)";
+            String req= "select * from Offer where status='En attente'";
+            ResultSet rs=cnx.createStatement().executeQuery(req);
+        
+            while(rs.next())
+            {
+                Offer o=new Offer(rs.getInt("id"),rs.getString("name"),rs.getInt("priceMax"), rs.getString("type"));
+                data.add(o); 
+                
+             
+            }
+            System.out.println(data.toString()) ;
+        }
+        catch(SQLException ex){System.out.println(ex.getMessage());}
+        return data;
+     }
+    
+    
+    
+    
+    public ObservableList<Offer> OfferListHistory(){
+        ObservableList data;
+        data =  FXCollections.observableArrayList();
+        try{
+            String req= "select * from Offer where status!='En attente'";
+            ResultSet rs=cnx.createStatement().executeQuery(req);
+        
+            while(rs.next())
+            {
+                Offer o=new Offer(rs.getInt("id"),rs.getString("name"), rs.getString("type"),rs.getString("status"),rs.getString("location"),rs.getInt("priceMax"));
+                data.add(o); 
+                
+             
+            }
+            System.out.println(data.toString()) ;
+        }
+        catch(SQLException ex){System.out.println(ex.getMessage());}
+        return data;
+     }
+    
+    
+    public ObservableList<Offer> AllOffer(){
+        ObservableList data;
+        data =  FXCollections.observableArrayList();
+        try{
+            String req= "select * from Offer";
+            ResultSet rs=cnx.createStatement().executeQuery(req);
+        
+            while(rs.next())
+            {
+                Offer o=new Offer(rs.getInt("id"),rs.getString("name"), rs.getString("type"),rs.getString("status"),rs.getString("location"),rs.getInt("priceMax"));
+                data.add(o); 
+                
+               
+            }
+            System.out.println(data.toString()) ;
+        }
+        catch(SQLException ex){System.out.println(ex.getMessage());}
+        return data;
+     }
+
+
+    @Override
+    public void create(Offer obj)  {
+        try{
+            String query = "insert into offer(Name,PriceMin,PriceMax,Type,Description,Location,status) values(?, ?, ?, ?, ?, ? ,?)";
         PreparedStatement pst = cnx.prepareStatement(query);
-        pst.setDouble(1, obj.getId());
-        pst.setDouble(2, obj.getPriceMax());
-        pst.setString(3, obj.getDescription());
-        pst.setString(5, obj.getLocation());
-        pst.setString(6, obj.getName());
-        pst.setString(7, obj.getType());
-        pst.setString(8, obj.getStatus());
-        pst.setDouble(9, obj.getPriceMin());          
+        pst.setString(1, obj.getName());
+        pst.setDouble(2, obj.getPriceMin());
+        pst.setDouble(3, obj.getPriceMax());
+        pst.setString(4, obj.getType());
+        pst.setString(5, obj.getDescription());
+        pst.setString(6, obj.getLocation());
+        pst.setString(7, "En attente");
+            System.out.println("ajout");
+                  
         pst.executeUpdate();
       
                     }
          catch (SQLException ex){
-             System.out.println("erreur create");
+             System.out.println(ex.getMessage());
+             
 
          }
                
     
     }
-   
-            
+  
        
 
     @Override
-    public void update(Offer obj) throws SQLException {
-String query = "UPDATE offer SET PriceMax = ? , PriceMin = ? , Location = ? , Name = ?, Type = ?, Status = ?, Description = ? WHERE id = ?";
+    public void update(Offer obj, int x)  {
+        try {
+            String query = "UPDATE offer SET Name = ? ,Type = ? , Location = ?, PriceMax = ?  WHERE id ="+x ;
         PreparedStatement pst = cnx.prepareStatement(query);
-        pst.setDouble(1, obj.getPriceMax());
-        pst.setDouble(2, obj.getPriceMin());
-        pst.setString(3, obj.getName());
-        pst.setString(4, obj.getLocation());
-        pst.setString(5, obj.getDescription());
-        pst.setString(5, obj.getStatus());
-        pst.setString(5, obj.getType());
-        pst.executeUpdate();    }
+       pst.setString(1, obj.getName());
+        pst.setString(2, obj.getType());
+        pst.setString(3, obj.getLocation());
+        pst.setDouble(4, obj.getPriceMax());
+       
+        
+       
+        pst.executeUpdate(); 
+            
+        }
+         catch (SQLException ex){
+             System.out.println(ex.getMessage());
+         }
+        
+        
+        
+   }
+    
+     
+
+    @Override
+    public void deleteOffer(int id) {
+
+        PreparedStatement pt;
+        
+        try{
+            String req="delete from Offer where id=?";
+            pt=cnx.prepareStatement(req);
+           
+            pt.setInt(1,id);
+          pt.executeUpdate();
+           
+     }
+    catch(SQLException ex){}
+    }
+    
+      
+    public void updateAcceptedStatus(Offer obj, int x)  {
+        try {
+            String query = "UPDATE offer SET status=? WHERE id ="+x ;
+        PreparedStatement pst = cnx.prepareStatement(query);
+       pst.setString(1,"Accepted");
+        
+        pst.executeUpdate(); 
+            
+        }
+         catch (SQLException ex){
+             System.out.println(ex.getMessage());
+         }
+        
+        
+        
+   }
+
+    
+    public void updateRejectedStatus(Offer obj, int x)  {
+        try {
+            String query = "UPDATE offer SET status=? WHERE id ="+x ;
+        PreparedStatement pst = cnx.prepareStatement(query);
+       pst.setString(1,"Rejected");
+        
+        pst.executeUpdate(); 
+            
+        }
+         catch (SQLException ex){
+             System.out.println(ex.getMessage());
+         }
+        
+        
+        
+   }
+ 
+    
     
     
 }
