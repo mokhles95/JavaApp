@@ -57,37 +57,37 @@ public class RegisterController {
     private void HandleBtnSave(ActionEvent event) {
         Window owner = btnSave.getScene().getWindow();
         if (txtEmail.getText().isEmpty()) {
-            Utils.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Please enter your email");
             return;
         }
 
         if (password.getText().isEmpty()) {
-            Utils.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Please enter your password");
             return;
         }
 
         if (!employerType.isSelected() && !freelancerType.isSelected()){
-            Utils.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Please select an account type");
             return;
         }
 
         if (txtUserName.getText().isEmpty()) {
-            Utils.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Please enter your txtUserName");
             return;
         }
 
         if (password1.getText().isEmpty()) {
-            Utils.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Please enter your password again");
             return;
         }
 
         if (!password1.getText().equals(password.getText())) {
-            Utils.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Your password and password confirmation must be the same");
         }
         String accountType = "";
@@ -101,14 +101,14 @@ public class RegisterController {
         User user = new User(txtEmail.getText(), accountType, txtUserName.getText(), password1.getText());
         if (authenticationService.login(txtEmail.getText(), txtUserName.getText()))
         {
-             Utils.AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
+             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "These crendetials already exist");
         }
         else if (authenticationService.register(user)) {
-            Utils.AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Registration Successful!",
+            AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Registration Successful!",
                     "Welcome ");
         } else {
-            Utils.AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Registration Error!",
+            AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Registration Error!",
                     "Verify Credentials ");
         }
     }

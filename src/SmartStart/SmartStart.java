@@ -27,7 +27,7 @@ public class SmartStart extends Application {
     private Scene scene;
     public SmartStart() throws IOException, InterruptedException {
         instance = this;
-        scene = new Scene(FXMLLoader.load(getClass().getResource("/GUI/Offer/OfferList.fxml")));
+        scene = new Scene(FXMLLoader.load(getClass().getResource("/GUI/Dashboard/Dashboard_Freelancer.fxml")));
     }
      public static SmartStart getInstance() {
         return instance;

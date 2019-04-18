@@ -7,7 +7,7 @@ package Controllers.Bid;
 
 import Entities.Bid;
 import Services.Implementation.BidService;
-import Utils.AlertHelper;
+import Tools.AlertHelper;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;

@@ -5,7 +5,7 @@
  */
 package Tools;
 
-import Entities.FosUser;
+import Entities.User;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +16,7 @@ import java.util.Set;
 public final class UserSession {
 
     private static UserSession instance;
-    public static FosUser User ;
+    public static User User ;
 
     private String userName;
     private Set<String> privileges;

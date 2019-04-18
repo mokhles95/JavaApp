@@ -8,7 +8,6 @@ package Services.Implementation;
 import Tools.DataSource;
 import Entities.FosUser;
 import Entities.Offer;
-import Tools.BCrypt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.mindrot.jbcrypt.BCrypt;
+
 
 /**
  *

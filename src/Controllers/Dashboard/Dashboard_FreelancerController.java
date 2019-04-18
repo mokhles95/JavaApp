@@ -5,7 +5,7 @@
  */
 package Controllers.Dashboard;
 
-import Utils.AlertHelper;
+import Tools.AlertHelper;
 import Utils.SwitchView;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -118,7 +118,7 @@ public class Dashboard_FreelancerController implements Initializable {
     private void displayBookmarkList(ActionEvent event) {
 
         try {
-            loadViewContent("GUI/Bookmark/Bookmark.fxml", windowPane,content);
+            loadViewContent("/GUI/Bookmark/Bookmark.fxml", windowPane,content);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
