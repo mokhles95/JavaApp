@@ -12,18 +12,24 @@ package Controllers.Bid;
 import Entities.Bid;
 import Services.Implementation.BidService;
 import Tools.SwitchView;
+import Tools.UserSessions;
+import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -37,28 +43,32 @@ public class BidController implements Initializable {
     @FXML
     private VBox dynamicVbox;
 
-    BidService bidService = BidService.getInstance();
     SwitchView switchView = SwitchView.getInstance();
+    @FXML
+    private JFXButton BidButton;
+
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ArrayList<Bid> bids = bidService.displayBids();
-        try {
 
-            for (Bid bid : bids) {
-                //System.out.println(bid.getId());
-                dynamicVbox.getChildren().add(addBidView(bid));
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+    this.initBids();
 
     }
 
+    public  void initBids(){
+         ArrayList<Bid>  bids = BidService.displayBids();
+        try {
+            for (Bid bid : bids) {
+                dynamicVbox.getChildren().add(addBidView(bid));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
     public Parent addBidView(Bid bid) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("GUI/Bid/SingleBid.fxml"));
         Parent root = (Parent) loader.load();
@@ -67,19 +77,22 @@ public class BidController implements Initializable {
         return root;
     }
 
-    /**
-     * When this method is called, it will change the Scene to a TableView
-     * example
-     *
-     * public void changeScreenButtonPushed(ActionEvent event) throws
-     * IOException { Parent tableViewParent =
-     * FXMLLoader.load(getClass().getResource("FXMLDocument.fxml")); Scene
-     * tableViewScene = new Scene(tableViewParent);
-     *
-     * //This line gets the Stage information Stage window = (Stage) ((Node)
-     * event.getSource()).getScene().getWindow();
-     *
-     * window.setScene(tableViewScene); window.show(); }
-     *
-     */
+    @FXML
+    private void makeBid(ActionEvent event) throws IOException {
+        this.openAddWindow();
+    }
+
+        public void openAddWindow() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("GUI/Bid/AddBid.fxml"));
+        Parent rootAdmin = (Parent) fxmlLoader.load();
+        
+        AddBidController addBidController = fxmlLoader.getController();
+        addBidController.loadData(2);
+        Stage stage = new Stage();
+        stage.setTitle("Add Bid");
+        stage.setScene(new Scene(rootAdmin));
+        stage.resizableProperty().setValue(Boolean.FALSE);
+        stage.show();
+    }
+
 }

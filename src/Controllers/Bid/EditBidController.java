@@ -8,7 +8,9 @@ package Controllers.Bid;
 import Entities.Bid;
 import Entities.Project;
 import Services.Implementation.BidService;
+import Tools.AlertHelper;
 import Tools.CurrentDate;
+import Tools.SwitchView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 import java.net.URL;
@@ -22,10 +24,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -45,15 +49,11 @@ public class EditBidController implements Initializable {
 
     Label label = new Label();
     @FXML
-    private Label minRateVal;
-    @FXML
-    private Label timVal;
-    @FXML
-    private Label daqdvql;
-    @FXML
     private JFXSlider sliderTime;
     @FXML
     private JFXSlider sliderRate;
+
+    private int bidId;
 
     /**
      * Initializes the controller class.
@@ -64,11 +64,9 @@ public class EditBidController implements Initializable {
     }
 
     public void loadData(int bidId) {
+        this.bidId = bidId;
         setSliderRate(bidId);
         setSliderTime(bidId);
-       // sliderRate.valueProperty().addListener((observable, oldValue, newValue) -> {
-          //  System.out.println("sliderRate" + observable.getValue().longValue());
-        //});
 
     }
 
@@ -105,14 +103,24 @@ public class EditBidController implements Initializable {
 
     @FXML
     private void cancelUpdate(ActionEvent event) {
-        Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        s.close();
+        SwitchView.getInstance().closeWindow(cancelUpdate);
     }
 
     @FXML
     private void updateBid(ActionEvent event) {
-        System.out.println(sliderRate.getValue());
+        Window owner = updateBidButton.getScene().getWindow();
+
+        int updateMinRat = (int) sliderRate.getValue();
+        int updateDeliveryTime = (int) sliderTime.getValue();
+
         System.out.println(sliderTime.getValue());
+        if (bidService.updateBid(this.bidId, updateMinRat, updateDeliveryTime)) {
+            SwitchView.getInstance().closeWindow(updateBidButton); 
+                    
+        } else {
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Error", "Error");
+        }
+
     }
 
     private long getNumberOfDays(String date) {

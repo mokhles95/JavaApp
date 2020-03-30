@@ -119,11 +119,7 @@ public class OfferListController implements Initializable {
             }
             
      });
-        
-                  
-        
-        
-        
+
         }
 
  @FXML

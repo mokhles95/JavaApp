@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="757.0" style="-fx-background-color: #F7F7F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Review.ReviewController">
+  <children>
+    <Label layoutX="18.0" layoutY="158.0" text="Was it on budget?" />
+    <Label layoutX="25.0" layoutY="196.0" text="Was it on time?" />
+    <Label layoutX="46.0" layoutY="236.0" text="Rating :" />
+    <Label layoutX="37.0" layoutY="281.0" text="Comment :" />
+    <RadioButton id="yes1" fx:id="yesBudget" layoutX="133.0" layoutY="158.0" mnemonicParsing="false" text="Yes" />
+    <RadioButton id="nobudget" fx:id="noBudget" layoutX="199.0" layoutY="158.0" mnemonicParsing="false" text="No" />
+    <RadioButton fx:id="yesTime" layoutX="133.0" layoutY="196.0" mnemonicParsing="false" text="Yes" />
+    <RadioButton fx:id="noTime" layoutX="199.0" layoutY="196.0" mnemonicParsing="false" text="No" />
+    <Button fx:id="add" layoutX="241.0" layoutY="419.0" mnemonicParsing="false" onAction="#add" style="-fx-background-color: #00CC00;" text="Add">
+         </Button>
+    <TableView fx:id="tab" layoutX="303.0" layoutY="-1.0" prefHeight="399.0" prefWidth="454.0" style="-fx-background-color: #F7F7F7;">
+      <columns>
+        <TableColumn fx:id="budgetTab" prefWidth="85.0" text="on Budget" />
+        <TableColumn fx:id="timeTab" prefWidth="75.0" text="on Time" />
+        <TableColumn fx:id="rateTab" prefWidth="91.0" text="Rate" />
+        <TableColumn fx:id="commentTab" maxWidth="5000.0" minWidth="10.0" prefWidth="202.0" text="Comment" />
+        <TableColumn fx:id="idTab" maxWidth="5000.0" minWidth="0.0" prefWidth="0.0" text="id" />
+      </columns>
+    </TableView>
+    <Button fx:id="delete" layoutX="387.0" layoutY="419.0" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #DC143C;" text="Delete" textAlignment="CENTER" textFill="WHITE">
+        </Button>
+      <FontAwesomeIconView />
+      <Button fx:id="update" layoutX="303.0" layoutY="419.0" mnemonicParsing="false" onAction="#update" prefHeight="27.0" prefWidth="67.0" style="-fx-background-color: #0080FF;" text="Update">
+        </Button>
+      <Label layoutX="87.0" layoutY="8.0" prefHeight="48.0" prefWidth="140.0" text="Reviews" textAlignment="CENTER">
+         
+      </Label>
+      <TextArea fx:id="comment" layoutX="110.0" layoutY="281.0" prefHeight="116.0" prefWidth="177.0" />
+      <TextArea fx:id="nbre" layoutX="686.0" layoutY="420.0" prefHeight="48.0" prefWidth="59.0" style="-fx-background-color: #F7F7F7;">
+        
+      </TextArea>
+      <Label layoutX="491.0" layoutY="420.0" prefHeight="33.0" prefWidth="185.0" text="Total Reviews Nomber :">
+         
+      </Label>
+      <ComboBox fx:id="reviewed" layoutX="108.0" layoutY="67.0" prefWidth="150.0" promptText="Select Freelancer" />
+      <ComboBox fx:id="project" layoutX="108.0" layoutY="112.0" prefWidth="150.0" promptText="Select Project" />
+      <Label layoutX="48.0" layoutY="71.0" text="Review :" />
+      <Label layoutX="18.0" layoutY="116.0" prefHeight="17.0" prefWidth="83.0" text="For his project :" />
+      <Button fx:id="report" layoutX="34.0" layoutY="420.0" mnemonicParsing="false" onAction="#reportAction" text="Report" />
+      <Rating fx:id="rating" layoutX="111.0" layoutY="230.0" prefHeight="33.0" prefWidth="150.0" rating="0.0" />
+  </children>
+</AnchorPane>

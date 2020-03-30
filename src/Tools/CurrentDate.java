@@ -24,13 +24,15 @@ public class CurrentDate {
         return date;
 
     }
+    
 
-    public static String Date() {
+      public static String Date() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //get current date time with Date()
         java.util.Date date = new java.util.Date();
         return dateFormat.format(date);
     }
+
 
     public String Time() {
         DateFormat dateFormat = new SimpleDateFormat("h:mm a");

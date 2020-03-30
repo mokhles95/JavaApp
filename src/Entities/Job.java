@@ -10,11 +10,12 @@ package Entities;
 
 public class Job  {
 
-    private static final long serialVersionUID = 1L;
+    
    
     private Integer id;
     
-    private String title;
+    
+    private String titre;
     
     private String type;
     
@@ -26,13 +27,11 @@ public class Job  {
     
     private String description;
     
-    private String tags;
+    private int category_id;
     
-    private FreelancersBookmark freelancersBookmark;
+    private int employer_Id;
     
-    private Category categoryId;
-    
-    private FosUser employerId;
+
 
     public Job() {
     }
@@ -41,16 +40,42 @@ public class Job  {
         this.id = id;
     }
 
-    public Job(Integer id, String title, String type, String location, double minSalary, double maxSalary, String description, String tags) {
+    public Job(Integer id, String title, String type, String location, double minSalary, double maxSalary, String description) {
         this.id = id;
-        this.title = title;
+        this.titre = title;
         this.type = type;
         this.location = location;
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.description = description;
-        this.tags = tags;
+     
+        
     }
+    
+    public Job(String title, String type, String location, double minSalary, double maxSalary, String description,int employer) {
+        
+        this.titre = title;
+        this.type = type;
+        this.location = location;
+        this.minSalary = minSalary;
+        this.maxSalary = maxSalary;
+        this.description = description;
+        this.employer_Id = employer;
+
+    }
+    
+    public Job(String title, String type, String location, double minSalary, double maxSalary, String description) {
+        
+        this.titre = title;
+        this.type = type;
+        this.location = location;
+        this.minSalary = minSalary;
+        this.maxSalary = maxSalary;
+        this.description = description;
+    }
+
+   
+    
 
     public Integer getId() {
         return id;
@@ -60,12 +85,16 @@ public class Job  {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    /**
+     *
+     * @return
+     */
+    public String getTitre() {
+        return titre;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitre(String title) {
+        this.titre = title;
     }
 
     public String getType() {
@@ -84,19 +113,19 @@ public class Job  {
         this.location = location;
     }
 
-    public double getMinSalary() {
+    public double getMinSal() {
         return minSalary;
     }
 
-    public void setMinSalary(double minSalary) {
+    public void setMinSal(double minSalary) {
         this.minSalary = minSalary;
     }
 
-    public double getMaxSalary() {
+    public double getMaxSal() {
         return maxSalary;
     }
 
-    public void setMaxSalary(double maxSalary) {
+    public void setMaxSal(double maxSalary) {
         this.maxSalary = maxSalary;
     }
 
@@ -108,38 +137,36 @@ public class Job  {
         this.description = description;
     }
 
-    public String getTags() {
-        return tags;
+   
+  
+
+   
+
+    
+
+   
+    
+
+    
+
+    public int getEmployer_id() {
+        return employer_Id;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
+    public void setEmployer_id(int employer_id) {
+        this.employer_Id = employer_id;
     }
 
-    public FreelancersBookmark getFreelancersBookmark() {
-        return freelancersBookmark;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setFreelancersBookmark(FreelancersBookmark freelancersBookmark) {
-        this.freelancersBookmark = freelancersBookmark;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
-    public Category getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public FosUser getEmployerId() {
-        return employerId;
-    }
-
-    public void setEmployerId(FosUser employerId) {
-        this.employerId = employerId;
-    }
-
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

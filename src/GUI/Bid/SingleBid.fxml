@@ -6,55 +6,73 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="singleBidContentPane" prefHeight="150.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Bid.SingleBidController">
+<AnchorPane id="AnchorPane" fx:id="singleBidContentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="850.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Bid.SingleBidController">
     <children>
-      <Pane fx:id="singleBidPane" prefHeight="150.0" prefWidth="950.0">
+      <Pane fx:id="singleBidPane" layoutX="50.0" layoutY="10.0" prefHeight="135.0" prefWidth="810.0" style="-fx-border-width: 4; -fx-background-color: #ecf0f1; -fx-border-color: #2980b9; -fx-border-radius: 15;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label fx:id="minimalRateLabel" blendMode="SRC_ATOP" focusTraversable="false" layoutX="789.0" layoutY="26.0" text="Minimal Rate" textOverrun="WORD_ELLIPSIS">
+            <Line endX="100.0" layoutX="210.0" layoutY="20.0" startX="100.00003051757812" startY="87.50231170654297" />
+            <Label blendMode="SRC_ATOP" focusTraversable="false" layoutX="54.0" layoutY="19.0" prefHeight="30.0" prefWidth="67.0" text="Project">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label blendMode="SRC_ATOP" focusTraversable="false" layoutX="53.0" layoutY="52.0" prefHeight="30.0" prefWidth="162.0" text="Minumum Budget">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label blendMode="SRC_ATOP" focusTraversable="false" layoutX="54.0" layoutY="84.0" prefHeight="30.0" prefWidth="172.0" text="Maximum Budget">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="minimalRateLabel" blendMode="SRC_ATOP" focusTraversable="false" layoutX="575.0" layoutY="27.0" text="Minimal Rate" textOverrun="WORD_ELLIPSIS">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
                </font>
                <rotationAxis>
                   <Point3D />
                </rotationAxis></Label>
-            <Label fx:id="deliveryTimeLabel" blendMode="SRC_ATOP" focusTraversable="false" layoutX="415.0" layoutY="26.0" text="Delivery Time">
+            <Label fx:id="deliveryTimeLabel" blendMode="SRC_ATOP" focusTraversable="false" layoutX="355.0" layoutY="27.0" text="Delivery Time">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font></Label>
+            <Label fx:id="projectTitleValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="130.0" layoutY="18.0" prefHeight="30.0" prefWidth="162.0" text="Placeholder Project">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label fx:id="projectTitleValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="31.0" layoutY="21.0" prefHeight="30.0" prefWidth="74.0" text="Placeholder Project">
+            <Label fx:id="projectMinBungetValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="240.0" layoutY="52.0" prefHeight="30.0" prefWidth="58.0" text="30">
                <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="projectMinBungetValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="25.0" layoutY="54.0" prefHeight="30.0" prefWidth="187.0" text="Placeholder Project Description">
-               <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="projectMaxBungetValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="25.0" layoutY="92.0" prefHeight="30.0" prefWidth="187.0" text="Placeholder Project Description">
+            <Label fx:id="projectMaxBungetValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="240.0" layoutY="84.0" prefHeight="30.0" prefWidth="37.0" text="30">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="deliveryTimeValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="366.0" layoutY="59.0" text="Placeholder Delivery Time">
+            <Label fx:id="deliveryTimeValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="401.0" layoutY="60.0" prefHeight="20.0" prefWidth="67.0" text="5">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="minimalRateValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="699.0" layoutY="57.0" text="Placeholder Minimal Rat">
+            <Label fx:id="minimalRateValue" blendMode="SRC_ATOP" focusTraversable="false" layoutX="611.0" layoutY="60.0" prefHeight="20.0" prefWidth="58.0" text="5">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
-              <JFXButton fx:id="updateBid" layoutX="709.0" layoutY="107.0" onAction="#updateBid" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #26B99A; -fx-text-fill: white; -fx-font-size: 14;" text=" Update">
+              <JFXButton fx:id="updateBid" layoutX="516.0" layoutY="88.0" onAction="#updateBid" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #26B99A; -fx-text-fill: white; -fx-font-size: 14;" text=" Update">
                <graphic>
                   <FontAwesomeIconView fill="#fcf8f8" glyphName="CHECK" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="deleteBid" accessibleRole="IMAGE_VIEW" layoutX="826.0" layoutY="107.0" onAction="#deleteBid" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #DD4B39; -fx-text-fill: white; -fx-font-size: 14;" text="  Delete">
+            <JFXButton fx:id="deleteBid" accessibleRole="IMAGE_VIEW" layoutX="628.0" layoutY="87.0" onAction="#deleteBid" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #DD4B39; -fx-text-fill: white; -fx-font-size: 14;" text="  Delete">
               
             </JFXButton>
+            <Line endX="100.00006103515625" endY="-3.4625682830810547" layoutX="414.0" layoutY="25.0" startX="100.00006103515625" startY="38.50157165527344" />
          </children>
          <rotationAxis>
             <Point3D />

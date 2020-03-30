@@ -9,26 +9,24 @@ import Tools.CurrentDate;
 import java.io.Serializable;
 import java.util.Date;
 
-
-
 public class Bookmark implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private int id;
-   
+
     private Date dateAdded;
-    
+
     private int projectId;
-    
+
     private int freelancerId;
-    
+
     public Bookmark(int id, int projectId, int freelancerId, Date dateAdded) {
         this.id = id;
-        this.dateAdded = CurrentDate.getCurrentDate();
+        this.dateAdded = dateAdded;
         this.projectId = projectId;
         this.freelancerId = freelancerId;
-        
+
     }
 
     public Bookmark(int id, int projectId, int freelancerId) {
@@ -38,15 +36,17 @@ public class Bookmark implements Serializable {
         this.freelancerId = freelancerId;
     }
 
-    
     public Bookmark(int projectId, Date dateAdded) {
         this.projectId = projectId;
         this.dateAdded = dateAdded;
     }
-    
-    
 
+    public Bookmark(int freelancerId, int projectId, Date dateAdded) {
+        this.freelancerId = freelancerId;
 
+        this.projectId = projectId;
+        this.dateAdded = dateAdded;
+    }
 
     public Bookmark(int id) {
         this.id = id;
@@ -55,7 +55,6 @@ public class Bookmark implements Serializable {
     public int getId() {
         return this.id;
     }
-
 
     public Date getDateAdded() {
         return dateAdded;
@@ -81,13 +80,9 @@ public class Bookmark implements Serializable {
         this.freelancerId = freelancerId;
     }
 
-    
-
     @Override
     public String toString() {
         return "Bookmark{" + "id=" + id + ", dateAdded=" + dateAdded + ", projectId=" + projectId + ", freelancerId=" + freelancerId + '}';
     }
 
-
-    
 }

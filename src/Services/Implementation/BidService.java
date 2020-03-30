@@ -55,7 +55,7 @@ public class BidService implements BidServiceInterface {
                 do {
                     Bid bid = new Bid(resultSet.getInt("id"), resultSet.getInt("minimalRate"), resultSet.getInt("deliveryTime"), resultSet.getInt("project_id"), resultSet.getInt("freelancer_id"));
                     return bid;
- 
+
                 } while (resultSet.next());
             }
         } catch (SQLException exception) {
@@ -77,24 +77,20 @@ public class BidService implements BidServiceInterface {
                 System.out.println("ResultSet in empty in Java");
             } else {
                 do {
-                    project = new Project(id,resultSet.getString("projectName"), resultSet.getInt("minBudget"), resultSet.getInt("maxBudget"),resultSet.getDate("validityPeriod"));
-                    //System.out.println(project.toString());
+                    project = new Project(id, resultSet.getString("projectName"), resultSet.getInt("minBudget"), resultSet.getInt("maxBudget"), resultSet.getDate("validityPeriod"));
                     return project;
                 } while (resultSet.next());
             }
         } catch (SQLException exception) {
-            System.out.println("lala" + exception.getMessage());
-            //logger.log(Level.SEVERE, exception.getMessage());
+            System.out.println( exception.getMessage());
 
         }
         return null;
 
     }
 
-    @Override
-    public ArrayList<Bid> displayBids() {
+    public static ArrayList<Bid> displayBids() {
         ArrayList<Bid> bids = new ArrayList();
-        //Array values[] = new Array();
         try {
             String query = "SELECT id,minimalRate,deliveryTime,freelancer_id,project_id FROM bid";
             statement = cnx.createStatement();
@@ -104,13 +100,10 @@ public class BidService implements BidServiceInterface {
                 System.out.println("ResultSet in empty in Java");
             } else {
                 do {
-                    Bid bid = new Bid(resultSet.getInt("id"), resultSet.getInt("minimalRate"), resultSet.getInt("deliveryTime"), resultSet.getInt("freelancer_id"), resultSet.getInt("project_id"));
+                    Bid bid = new Bid(resultSet.getInt("id"), resultSet.getInt("minimalRate"), resultSet.getInt("deliveryTime"), resultSet.getInt("project_id"),resultSet.getInt("freelancer_id"));
                     bids.add(bid);
-
-                    //Bid bid = (Bid) resultSet.getObject(i);
-                    //}  
+ 
                 } while (resultSet.next());
-                //System.out.println(bids);
 
                 return bids;
             }
@@ -129,10 +122,10 @@ public class BidService implements BidServiceInterface {
             String query = "INSERT INTO bid VALUES (default,?,?,?,?) ";
             preparedStatement = cnx.prepareStatement(query);
             int counter = 1;
-            preparedStatement.setInt(counter++, bid.getMinimalRate());
-            preparedStatement.setInt(counter++, bid.getDeliveryTime());
             preparedStatement.setInt(counter++, bid.getFreelancerId());
             preparedStatement.setInt(counter++, bid.getProjectId());
+            preparedStatement.setInt(counter++, bid.getMinimalRate());
+            preparedStatement.setInt(counter++, bid.getDeliveryTime());
             preparedStatement.executeUpdate();
             cnx.commit();
             return true;
@@ -147,13 +140,10 @@ public class BidService implements BidServiceInterface {
     }
 
     @Override
-    public boolean deleteBid(Bid bid) {
+    public boolean deleteBid(int bidId) {
         try {
-            //cnx.setAutoCommit(false);
-            String query = "DELETE FROM bid WHERE id = ?";
+            String query = "DELETE FROM bid WHERE id = '" + bidId + "'";
             preparedStatement = cnx.prepareStatement(query);
-            preparedStatement.setInt(1, bid.getId());
-            //preparedStatement.setString(counter++, username);
             preparedStatement.executeUpdate();
             return true;
 
@@ -164,20 +154,15 @@ public class BidService implements BidServiceInterface {
         }
         return false;
     }
- 
+
     @Override
-    public boolean updateBid(Bid bid) {
+    public boolean updateBid(int bidId, int updateMinRat, int updateDeliveryTime) {
         try {
-            String query = "UPDATE bid SET"
-                    + "minimalRate = ? "
-                    + "deliveryTime = ? "
-                    +"WHERE id = ?";
-            int counter = 1;
-            preparedStatement.setInt(counter++, bid.getMinimalRate());
-            preparedStatement.setInt(counter++,bid.getDeliveryTime());
-            preparedStatement.setInt(counter++, bid.getId());
+            String query = "UPDATE bid SET minimalRate = '" + updateMinRat + "',deliveryTime = '" + updateDeliveryTime + "' WHERE id = '" + bidId + "'";
+
             preparedStatement = cnx.prepareStatement(query);
-            resultSet = preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
+            System.out.println("bid updated");
             return true;
 
         } catch (SQLException exception) {
@@ -187,6 +172,5 @@ public class BidService implements BidServiceInterface {
         }
 
     }
-    
-    
+
 }

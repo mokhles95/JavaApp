@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="673.0" prefWidth="1027.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Job.AllJobsInterfaceController">
+  <children>
+    <Accordion layoutX="232.0" layoutY="81.0" />
+      <TableView fx:id="tab" accessibleRole="CHECK_BOX" layoutX="26.0" layoutY="81.0" opacity="0.65" prefHeight="463.0" prefWidth="613.0" style="-fx-background-color: #E1E8ED;">
+      <columns>
+        <TableColumn id="titreId" fx:id="titreId" prefWidth="54.0" text="Title" />
+        <TableColumn fx:id="typeId" prefWidth="69.0" text="Type" />
+        <TableColumn fx:id="locId" prefWidth="87.0" text="Location" />
+        <TableColumn fx:id="minId" maxWidth="5000.0" minWidth="10.0" prefWidth="131.0" text="Minimum Salary" />
+        <TableColumn fx:id="maxId" maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Maximum Salary" />
+        <TableColumn fx:id="descId" maxWidth="5000.0" minWidth="10.0" prefWidth="172.0" text="Description" />
+        <TableColumn fx:id="id" minWidth="0.0" prefWidth="0.0" text="ID" />
+      </columns>
+       
+      </TableView>
+      <Button layoutX="91.0" layoutY="598.0" mnemonicParsing="false" onAction="#suppJob" opacity="0.9" prefHeight="46.0" prefWidth="105.0" style="-fx-background-color: #EA4335;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         </Button>
+      <Button layoutX="280.0" layoutY="598.0" mnemonicParsing="false" onAction="#update" opacity="0.9" prefHeight="46.0" prefWidth="105.0" style="-fx-background-color: #4285F4;" text="Update" textAlignment="CENTER" textFill="#f8f8f8">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+        </Button>
+      <TextField fx:id="maxId2" layoutX="821.0" layoutY="264.0" opacity="0.5" prefHeight="31.0" prefWidth="152.0" />
+      <TextField fx:id="titleId2" alignment="CENTER_LEFT" layoutX="821.0" layoutY="81.0" opacity="0.5" prefHeight="31.0" prefWidth="152.0" promptText="" />
+      <TextField fx:id="locId2" layoutX="821.0" layoutY="175.0" opacity="0.5" prefHeight="31.0" prefWidth="152.0" />
+      <TextField fx:id="minId2" layoutX="821.0" layoutY="218.0" opacity="0.5" prefHeight="31.0" prefWidth="152.0" />
+      <TextArea fx:id="descId2" layoutX="818.0" layoutY="314.0" opacity="0.5" prefHeight="111.0" prefWidth="152.0" wrapText="true" />
+      <Button id="saveId" fx:id="saveId" layoutX="842.0" layoutY="463.0" mnemonicParsing="false" onAction="#save" opacity="0.8" prefHeight="46.0" prefWidth="105.0" style="-fx-background-color: #34A853;" text="Save" textAlignment="CENTER" textFill="#f2f2f2" textOverrun="WORD_ELLIPSIS">
+       
+         <effect>
+            <Blend />
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font></Button>
+      <Label fx:id="titreId3" layoutX="696.0" layoutY="81.0" prefHeight="31.0" prefWidth="49.0" text="Title " />
+      <Label fx:id="typeId3" layoutX="696.0" layoutY="127.0" prefHeight="31.0" prefWidth="49.0" text="Type" />
+      <Label fx:id="locId3" layoutX="698.0" layoutY="175.0" prefHeight="31.0" prefWidth="75.0" text="Location" />
+      <Label fx:id="minId3" layoutX="696.0" layoutY="218.0" prefHeight="31.0" prefWidth="117.0" text="Minimum Salary" />
+      <Label fx:id="maxId3" layoutX="698.0" layoutY="264.0" prefHeight="31.0" prefWidth="123.0" text="Maximum Salary" />
+      <Label fx:id="descId3" layoutX="701.0" layoutY="354.0" prefHeight="31.0" prefWidth="89.0" text="Description" />
+      <TextField fx:id="total" layoutX="961.0" layoutY="539.0" prefHeight="33.0" prefWidth="41.0" style="-fx-background-color: #E1E8ED;">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font></TextField>
+      <Label layoutX="833.0" layoutY="544.0" prefHeight="21.0" prefWidth="123.0" text="Total Jobs ">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></Label>
+      <TextField fx:id="fullstack" layoutX="961.0" layoutY="580.0" prefHeight="39.0" prefWidth="41.0" style="-fx-background-color: #E1E8ED;">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label layoutX="833.0" layoutY="582.0" prefHeight="21.0" prefWidth="123.0" text="FullStack Jobs">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></Label>
+      <TextField fx:id="internship" layoutX="961.0" layoutY="616.0" prefHeight="39.0" prefWidth="41.0" style="-fx-background-color: #E1E8ED;">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label layoutX="833.0" layoutY="621.0" prefHeight="21.0" prefWidth="123.0" text="Internship Jobs">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></Label>
+      <JFXComboBox fx:id="typeId2" layoutX="820.0" layoutY="127.0" prefHeight="31.0" prefWidth="152.0" />
+      <Separator layoutX="666.0" layoutY="83.0" orientation="VERTICAL" prefHeight="406.0" prefWidth="21.0" />
+      <Button layoutX="461.0" layoutY="598.0" mnemonicParsing="false" onAction="#show" opacity="0.9" prefHeight="46.0" prefWidth="105.0" style="-fx-background-color: #A4C639;" text="Add" textAlignment="CENTER" textFill="#f8f8f8">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      
+      </Button>
+      <TextField fx:id="searchId" layoutX="26.0" layoutY="50.0" onKeyReleased="#searchByTitle" prefHeight="31.0" prefWidth="498.0" />
+      <JFXComboBox fx:id="searchById" layoutX="520.0" layoutY="50.0" prefHeight="31.0" prefWidth="123.0" unFocusColor="#e1e8ed" />
+      <FontAwesomeIconView fill="#a8a3a3" glyphName="SEARCH" layoutX="488.0" layoutY="75.0" size="2.3em" />
+  </children>
+</AnchorPane>

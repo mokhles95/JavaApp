@@ -30,6 +30,11 @@ public class Report {
         this.id = id;
     }
 
+    public Report(Date createdAt, String text) {
+        this.createdAt = createdAt;
+        this.text = text;
+    }
+
     public Report(Integer id, Date createdAt, String text) {
         this.id = id;
         this.createdAt = createdAt;

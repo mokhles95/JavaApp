@@ -5,27 +5,18 @@
  */
 package Controllers.Dashboard;
 
-import Tools.AlertHelper;
-import Utils.SwitchView;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -35,15 +26,9 @@ import javafx.stage.Window;
 public class Dashboard_FreelancerController implements Initializable {
 
     @FXML
-    private Label name;
-    @FXML
     private JFXButton profile;
     @FXML
     private JFXButton bnthome;
-    @FXML
-    private JFXButton list_events;
-    @FXML
-    private JFXButton list_organi;
     @FXML
     private JFXButton list_espace;
     @FXML
@@ -55,21 +40,41 @@ public class Dashboard_FreelancerController implements Initializable {
     @FXML
     private JFXButton listBookmarks;
     @FXML
-    private AnchorPane windowPane;
+    public AnchorPane windowPane;
     @FXML
     private JFXButton bidNavigation;
     @FXML
-    private Pane logo;
+    public Pane content;
     @FXML
-    private Pane content;
-
+    private Label usernameHeader;
+    @FXML
+    private Label name1;
+    @FXML
+    private Label usernameNav;
+    
+      @FXML
+    private JFXButton skills;
+    @FXML
+    private JFXButton projectList;
+    @FXML
+    private JFXButton jobList;
+    
+    public void setUserName(String username)
+    {
+        this.usernameNav.setText(username);
+        this.usernameHeader.setText(username);
+    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }
+    
+
+    
+    
 
     @FXML
     private void openprofile(ActionEvent event) {
@@ -79,13 +84,6 @@ public class Dashboard_FreelancerController implements Initializable {
     private void openhome(ActionEvent event) {
     }
 
-    @FXML
-    private void openlist_events(ActionEvent event) {
-    }
-
-    @FXML
-    private void openlist_organi(ActionEvent event) {
-    }
 
     @FXML
     private void openlist_espace(ActionEvent event) {
@@ -93,9 +91,9 @@ public class Dashboard_FreelancerController implements Initializable {
 
     @FXML
     private void openlist_tickets(ActionEvent event) {
-        
+
         try {
-            loadViewContent("GUI/Project/Project.fxml", windowPane,content);
+            loadViewContent("/GUI/Project/Project.fxml", windowPane, content);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -106,9 +104,9 @@ public class Dashboard_FreelancerController implements Initializable {
     }
 
     @FXML
-    private void displayBidList(ActionEvent event) {
+    public void displayBidList(ActionEvent event) {
         try {
-            loadViewContent("/GUI/Bid/Bid.fxml", windowPane,content);
+            loadViewContent("/GUI/Bid/Bid.fxml", windowPane, content);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -118,19 +116,55 @@ public class Dashboard_FreelancerController implements Initializable {
     private void displayBookmarkList(ActionEvent event) {
 
         try {
-            loadViewContent("/GUI/Bookmark/Bookmark.fxml", windowPane,content);
+            loadViewContent("/GUI/Bookmark/Bookmark.fxml", windowPane, content);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    private void loadViewContent(String path,AnchorPane root,Pane content) throws IOException{
-            content = FXMLLoader.load(getClass().getResource(path));
-            root.getChildren().set(3, content);
-            content.setLayoutX(250);
-            content.setLayoutY(150);
-        }
+
+    private void loadViewContent(String path, AnchorPane root, Pane content) throws IOException {
+        content = FXMLLoader.load(getClass().getResource(path));
+        root.getChildren().set(3, content);
+        content.setLayoutX(250);
+        content.setLayoutY(150);
+    }
     
+     
+
+    @FXML
+    private void openSkills(ActionEvent event) {
+                try {
+            loadViewContent("/GUI/Skills/skillsFXML.fxml", windowPane, content);
+            
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void reviewList(ActionEvent event) {
+         try {
+            loadViewContent("/GUI/Review/Review.fxml", windowPane, content);
+            
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void jobList(ActionEvent event) {
+         try {
+            loadViewContent("/GUI/Job/AllJobsInterface.fxml", windowPane, content);
+            
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    @FXML
+    private void projectList(ActionEvent event) {
+        
+    }
+
+
 }
-
-
-

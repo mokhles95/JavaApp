@@ -21,11 +21,11 @@ public class Portfolio implements Serializable {
     
     private String previousExperiences;
     
-    private String devisName;
+    private String importedFile;
     
     private Date updatedAt;
     
-    private FosUser freelancerId;
+    private int freelancerId;
 
     public Portfolio() {
     }
@@ -40,6 +40,35 @@ public class Portfolio implements Serializable {
         this.description = description;
         this.previousExperiences = previousExperiences;
     }
+
+    /**
+     *
+     * @param skills
+     * @param description
+     * @param previousExperiences
+     * @param freelancer_id
+     */
+    public Portfolio(String skills, String description, String previousExperiences,int freelancer_id) {
+        this.skills = skills;
+        this.description = description;
+        this.previousExperiences = previousExperiences;
+        this.freelancerId=freelancer_id;
+    }
+    
+     public Portfolio(String skills, String description, String previousExperiences) {
+        this.skills = skills;
+        this.description = description;
+        this.previousExperiences = previousExperiences;
+    }
+    
+    
+    
+    
+
+   
+    
+    
+    
 
     public Integer getId() {
         return id;
@@ -73,13 +102,15 @@ public class Portfolio implements Serializable {
         this.previousExperiences = previousExperiences;
     }
 
-    public String getDevisName() {
-        return devisName;
+    public String getImportedFile() {
+        return importedFile;
     }
 
-    public void setDevisName(String devisName) {
-        this.devisName = devisName;
+    public void setImportedFile(String importedFile) {
+        this.importedFile = importedFile;
     }
+
+    
 
     public Date getUpdatedAt() {
         return updatedAt;
@@ -89,11 +120,11 @@ public class Portfolio implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public FosUser getFreelancerId() {
+    public int getFreelancerId() {
         return freelancerId;
     }
 
-    public void setFreelancerId(FosUser freelancerId) {
+    public void setFreelancerId(int freelancerId) {
         this.freelancerId = freelancerId;
     }
 

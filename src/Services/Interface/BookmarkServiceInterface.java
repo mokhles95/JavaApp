@@ -6,8 +6,7 @@
 package Services.Interface;
 
 import Entities.Bookmark;
-import Entities.Project;
-import Entities.User;
+
 import java.util.ArrayList;
 
 /**
@@ -16,6 +15,6 @@ import java.util.ArrayList;
  */
 public interface BookmarkServiceInterface {
     public boolean addBookmark(Bookmark bookmark);
-    public boolean deleteBookmark(Bookmark bookmark);
+    public boolean deleteBookmark(int BookmarkId);
     public ArrayList<Bookmark> displayBookmarks();
 }

@@ -14,13 +14,12 @@ import java.util.ArrayList;
  */
 public interface BidServiceInterface {
 
-    public ArrayList<Bid> displayBids();
 
     public boolean addBid(Bid bid);
 
-    public boolean deleteBid(Bid bid);
+    public boolean deleteBid(int bidId);
 
-    public boolean updateBid(Bid bid);
+    public boolean updateBid(int bidId,int updateMinRat, int  updateDeliveryTime);
     
     //public boolean updateDeliveryTimeBid(Bid bid);
     

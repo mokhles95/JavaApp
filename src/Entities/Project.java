@@ -59,6 +59,13 @@ public class Project implements Serializable {
 
     }
 
+    public Project(int id, String projectName) {
+        this.projectName = projectName;
+
+        this.id = id;
+
+    }
+
     public Project(Integer id, String projectName, int minBudget, int maxBudget, String projectLocation, String projectDescription, Date publishingDate, Date validityPeriod) {
         this.id = id;
         this.projectName = projectName;

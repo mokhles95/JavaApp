@@ -5,6 +5,11 @@
  */
 package Entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.BooleanProperty;
 
 /**
@@ -12,6 +17,7 @@ import javafx.beans.property.BooleanProperty;
  * @author asus
  */
 public class User {
+
     private int id;
     private String email;
     private String email_canonical;
@@ -22,6 +28,8 @@ public class User {
     private String username;
     private String username_canonical;
     private boolean enabled;
+    private String salt;
+    private Date lastLogin;
 
     public User(String email, String type, String username, String password) {
         this.email = email;
@@ -31,24 +39,29 @@ public class User {
         this.username_canonical = username.toLowerCase();
         this.email_canonical = email.toLowerCase();
         this.enabled = true;
-        if (this.type.equalsIgnoreCase("freelancer"))
-        {
+        if (this.type.equalsIgnoreCase("freelancer")) {
             roles += "freelancer";
-        }
-        else
-        {
-            roles+= "employer" ;
+        } else {
+            roles += "employer";
         }
 
-        
     }
 
-    public User(String text, BooleanProperty type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User() {
+
+    }
+
+    public User(int id, String username, String type) {
+        this.id = id;
+        this.type = type;
+        this.username = username;
     }
 
     
-
+    public User(int id, String username) {
+        this.id = id;
+        this.username = username;
+    }
     public String getUsername_canonical() {
         return username_canonical;
     }
@@ -56,9 +69,6 @@ public class User {
     public void setUsername_canonical(String username_canonical) {
         this.username_canonical = username_canonical;
     }
-    
-    
-    
 
     public String getEmail_canonical() {
         return email_canonical;
@@ -75,9 +85,31 @@ public class User {
     public void setRoles(String roles) {
         this.roles = roles;
     }
-   
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 
     public boolean isEnabled() {
         return enabled;
@@ -86,7 +118,6 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
 
     public String getUsername() {
         return username;
@@ -104,7 +135,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
 
     public int getId() {
         return id;
@@ -145,10 +175,38 @@ public class User {
     public void setType(String type) {
         this.type = type;
     }
-    
-    
-    
-    
-    
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public static User createUser(ResultSet rs) {
+        User user = new User();
+        try {
+            user.setId(rs.getInt("id"));
+            user.setUsername(rs.getString("username"));
+            user.setEmail(rs.getString("email"));
+            user.setEnabled(rs.getBoolean("enabled"));
+            user.setSalt(rs.getString("salt"));
+            user.setPassword(rs.getString("password"));
+            user.setLastLogin(rs.getDate("last_login"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
 
 }

@@ -7,6 +7,7 @@ package Tools;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -46,6 +47,13 @@ private static SwitchView switchViewInstance;
         stage.setScene(new Scene(rootAdmin));
         stage.resizableProperty().setValue(Boolean.FALSE);
         stage.show();
+    }
+    
+        
+    public void closeWindow(Node node)
+    {
+               Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
     }
     
 }

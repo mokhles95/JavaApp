@@ -5,6 +5,7 @@
  */
 package Controllers.Bid;
 
+import Controllers.Dashboard.Dashboard_FreelancerController;
 import Entities.Bid;
 import Entities.Project;
 import Services.Implementation.BidService;
@@ -12,6 +13,7 @@ import Tools.SwitchView;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,17 +21,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 /**
  *
  * @author asus
  */
 public class SingleBidController implements Initializable {
+
     SwitchView switchView = SwitchView.getInstance();
 
     BidService bidService = BidService.getInstance();
@@ -56,13 +60,12 @@ public class SingleBidController implements Initializable {
     private Label projectMinBungetValue;
     @FXML
     private Label projectMaxBungetValue;
-        
+
     private Label id = new Label();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
-    //Receive message from scene 1
 
     public void transferSingleBid(Bid bid) {
         Project project = bidService.findProjectById(bid.getProjectId());
@@ -73,8 +76,8 @@ public class SingleBidController implements Initializable {
         minimalRateValue.setText(String.valueOf(bid.getMinimalRate()));
         id.setText(String.valueOf(bid.getId()));
     }
-    
-    public void openEditWindow() throws IOException{
+
+    public void openEditWindow() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("GUI/Bid/EditBid.fxml"));
         Parent rootAdmin = (Parent) fxmlLoader.load();
         EditBidController editBidController = fxmlLoader.getController();
@@ -85,7 +88,6 @@ public class SingleBidController implements Initializable {
         stage.resizableProperty().setValue(Boolean.FALSE);
         stage.show();
     }
-    
 
     @FXML
     private void updateBid(ActionEvent event) throws IOException {
@@ -94,6 +96,25 @@ public class SingleBidController implements Initializable {
 
     @FXML
     private void deleteBid(ActionEvent event) {
+        
+        
+       this.alertDelete("confirmation","DELETE","do you really want to delete this bid ?");
+
+       
     }
-    
+
+    private void alertDelete(String title, String header, String context) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(context);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+        bidService.deleteBid(Integer.valueOf(id.getText()));
+        } else {
+            alert.close();
+        }
+    }
+
 }

@@ -14,17 +14,17 @@ public class Review  {
    
     private Integer id;
     
-    private boolean onBudget;
+    private int onBudget;
    
-    private boolean onTime;
+    private int onTime;
     
     private int rating;
     
     private String comment;
     
-    private FosUser freelancerReviewedId;
+    private int freelancerReviewedId;
    
-    private Project projectId;
+    private int projectId;
     
     private FosUser employerReviewerId;
 
@@ -35,8 +35,26 @@ public class Review  {
         this.id = id;
     }
 
-    public Review(Integer id, boolean onBudget, boolean onTime, int rating, String comment) {
+    public Review(int onBudget, int onTime, int rating, String comment,  int projectId, int freelancerReviewedId) {
+        this.onBudget = onBudget;
+        this.onTime = onTime;
+        this.rating = rating;
+        this.comment = comment;
+        this.projectId = projectId;
+        this.freelancerReviewedId = freelancerReviewedId;
+        
+    }
+
+    
+    public Review(Integer id, int onBudget, int onTime, int rating, String comment) {
         this.id = id;
+        this.onBudget = onBudget;
+        this.onTime = onTime;
+        this.rating = rating;
+        this.comment = comment;
+    }
+
+    public Review(int onBudget, int onTime, int rating, String comment) {
         this.onBudget = onBudget;
         this.onTime = onTime;
         this.rating = rating;
@@ -51,19 +69,19 @@ public class Review  {
         this.id = id;
     }
 
-    public boolean getOnBudget() {
+    public int getOnBudget() {
         return onBudget;
     }
 
-    public void setOnBudget(boolean onBudget) {
+    public void setOnBudget(int onBudget) {
         this.onBudget = onBudget;
     }
 
-    public boolean getOnTime() {
+    public int getOnTime() {
         return onTime;
     }
 
-    public void setOnTime(boolean onTime) {
+    public void setOnTime(int onTime) {
         this.onTime = onTime;
     }
 
@@ -83,19 +101,19 @@ public class Review  {
         this.comment = comment;
     }
 
-    public FosUser getFreelancerReviewedId() {
+    public int getFreelancerReviewedId() {
         return freelancerReviewedId;
     }
 
-    public void setFreelancerReviewedId(FosUser freelancerReviewedId) {
+    public void setFreelancerReviewedId(int freelancerReviewedId) {
         this.freelancerReviewedId = freelancerReviewedId;
     }
 
-    public Project getProjectId() {
+    public int getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Project projectId) {
+    public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
 

@@ -9,6 +9,7 @@ import Entities.Bid;
 import Entities.Bookmark;
 import Entities.Project;
 import Entities.User;
+import static Services.Implementation.BidService.cnx;
 import Services.Interface.BookmarkServiceInterface;
 import Tools.CurrentDate;
 import Tools.DataSource;
@@ -38,15 +39,16 @@ public class BookmarkService implements BookmarkServiceInterface {
 
     private static BookmarkService bookmarkServiceInstance;
 
-    
-    private BookmarkService(){}
-    
-    public static BookmarkService getInstance(){
-        if(bookmarkServiceInstance==null) 
-            bookmarkServiceInstance=new BookmarkService();
+    private BookmarkService() {
+    }
+
+    public static BookmarkService getInstance() {
+        if (bookmarkServiceInstance == null) {
+            bookmarkServiceInstance = new BookmarkService();
+        }
         return bookmarkServiceInstance;
     }
-     
+
     @Override
     public ArrayList<Bookmark> displayBookmarks() {
         ArrayList<Bookmark> bookmarks = new ArrayList();
@@ -59,11 +61,10 @@ public class BookmarkService implements BookmarkServiceInterface {
                 System.out.println("ResultSet in empty in Java");
             } else {
                 do {
-                    //for (int i = 1; i <= resultMetaData.getColumnCount(); i++) {
-                        Bookmark bookmark = new Bookmark(resultSet.getInt("id"),resultSet.getInt("project_id"),resultSet.getInt("freelancer_id"),resultSet.getDate("dateAdded"));
-                        bookmarks.add(bookmark);
-                    //}
+                    Bookmark bookmark = new Bookmark(resultSet.getInt("id"), resultSet.getInt("project_id"), resultSet.getInt("freelancer_id"), resultSet.getDate("dateAdded"));
+                    bookmarks.add(bookmark);
                 } while (resultSet.next());
+                System.out.println(bookmarks.toString());
                 return bookmarks;
 
             }
@@ -76,71 +77,40 @@ public class BookmarkService implements BookmarkServiceInterface {
     }
 
     @Override
-    public boolean deleteBookmark(Bookmark bookmark) {
-        boolean deleted = false;
+    public boolean deleteBookmark(int BookmarkId) {
         try {
-            int bookmarkId;
-            if (bookmark != null) {
-                bookmarkId = bookmark.getId();
-                String query = "DELETE FROM bookmark WHERE id = ?";
-                preparedStatement = cnx.prepareStatement(query);
-
-                preparedStatement.setInt(1, bookmarkId);
-                preparedStatement.executeUpdate();
-                deleted = true;
-            }
+            String query = "DELETE FROM bookmark WHERE id = '" + BookmarkId + "'";
+            preparedStatement = cnx.prepareStatement(query);
+            preparedStatement.executeUpdate();
+            return true;
 
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
             logger.log(Level.SEVERE, exception.getMessage());
 
         }
-        return deleted;
+        return false;
     }
 
     @Override
     public boolean addBookmark(Bookmark bookmark) {
         try {
-            //cnx.setAutoCommit(false);
-            String query = "INSERT INTO bookmark VALUES(default,?,?,?)";
-            preparedStatement = cnx.prepareStatement(query);
-            //preparedStatement.addBatch();
-            //preparedStatement.executeBatch();
-            int counter = 1;
-            Date date = CurrentDate.getCurrentDate();
-            preparedStatement.setInt(counter++, bookmark.getFreelancerId());
-            preparedStatement.setInt(counter++, bookmark.getProjectId());
-            preparedStatement.setDate(counter++, date);
 
-            if (preparedStatement.executeUpdate() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            String query = "INSERT INTO bookmark VALUES (default,?,?,?)";
+            preparedStatement = cnx.prepareStatement(query);
+            Date date = CurrentDate.getCurrentDate();
+            preparedStatement.setInt(1, bookmark.getFreelancerId());
+            preparedStatement.setInt(2, bookmark.getProjectId());
+            preparedStatement.setDate(3, date);
+            preparedStatement.executeUpdate();
+            return true;
 
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
             logger.log(Level.SEVERE, exception.getMessage());
 
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (cnx != null) {
-                try {
-                    cnx.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(BidService.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
         }
-
         return false;
 
     }
-
 }

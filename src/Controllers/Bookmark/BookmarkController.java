@@ -5,15 +5,12 @@
  */
 package Controllers.Bookmark;
 
-import Controllers.Bid.SingleBidController;
-import Entities.Bid;
 import Entities.Bookmark;
-import Services.Implementation.BidService;
 import Services.Implementation.BookmarkService;
+import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,14 +19,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -40,11 +35,13 @@ public class BookmarkController implements Initializable {
 
     private TableView<Bookmark> tableView;
     @FXML
-    private AnchorPane containerBidsAnchor;
-    @FXML
     private VBox dynamicVbox;
     
     BookmarkService bookmarkService =  BookmarkService.getInstance();
+    @FXML
+    private AnchorPane containerBidsAnchor;
+    @FXML
+    private JFXButton BookmarkButton;
 
     /**
      * Initializes the controller class.
@@ -81,7 +78,7 @@ public class BookmarkController implements Initializable {
 
         //loop over the selected rows and remove the Bid objects from the table
         for (Bookmark bookmark : selectedRows) {
-            bookmarkService.deleteBookmark(bookmark);
+        //    bookmarkService.deleteBookmark(bookmark);
             allBookmarks.remove(bookmark);
         }
     }
@@ -94,4 +91,23 @@ public class BookmarkController implements Initializable {
         //System.out.println(bookmarks.toString());
         return bookmarks;
     }
+
+
+    @FXML
+    private void makeBookmark(ActionEvent event) throws IOException {
+        this.openAddWindow();
+    }
+
+        public void openAddWindow() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("GUI/Bookmark/AddBookmark.fxml"));
+        Parent rootAdmin = (Parent) fxmlLoader.load();
+        
+        AddBookmarkController addBookmarkController = fxmlLoader.getController();
+        Stage stage = new Stage();
+        stage.setTitle("Add Bookmark");
+        stage.setScene(new Scene(rootAdmin));
+        stage.resizableProperty().setValue(Boolean.FALSE);
+        stage.show();
+    }
+
 }

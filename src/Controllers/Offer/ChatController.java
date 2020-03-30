@@ -5,10 +5,7 @@
  */
 package Controllers.Offer;
 
-import Tools.UserSession;
-import Utils.Server;
-
-import com.jfoenix.controls.JFXButton;
+import Tools.UserSessions;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,11 +15,9 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -60,7 +55,7 @@ public class ChatController implements Initializable {
                  //////////////////////////////////////////////////////////////////////////////////////////////
                  
                  Utils.Client client;
-                 TextField nameField = new TextField(UserSession.User.getUsername());
+                 TextField nameField = new TextField(UserSessions.getInstance().getLoggedInUser().getUsername());
                  TextField hostNameField = new TextField("localhost");
                  TextField portNumberField = new TextField("8888");
                  hostNameField.setDisable(true);
